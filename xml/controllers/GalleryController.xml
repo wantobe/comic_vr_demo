@@ -1,0 +1,35 @@
+<krpano>
+	
+<!--
+	描述：初始化场景
+-->
+<action name="initScene" type="Javascript" devices="html5">
+		<![CDATA[
+		require(["json!"+krpano.get('content_data')+"?callbak=define"],
+			function(page_data){
+				var length = page_data.length;
+				if(length>0){
+					window.gallary_data = page_data;
+					krpano.call("gallery(0,0); page_handle(calc(page+1),"+length+");");
+				}
+			}
+		);
+		
+		]]>
+	</action>
+	
+
+	
+	<action name="play_next">
+		trace(skin_settings.isAutoStart);
+		if(skin_settings.isAutoStart EQ 1, 		clearinterval(gallaryinterval);set(hotspot[atuoBtn].url,%SWFPATH%/img/aut.png);delayedcall(0.7,gallery_next(););set(skin_settings.isAutoStart,0);,gallery_next(););
+	</action>
+	<action name="play_last">
+		if(skin_settings.isAutoStart EQ 1, 		clearinterval(gallaryinterval);set(hotspot[atuoBtn].url,%SWFPATH%/img/aut.png);delayedcall(0.7,gallery_last(););set(skin_settings.isAutoStart,0);,gallery_last(););
+	</action>
+	
+	<action name="toggle_play">
+		if(skin_settings.isAutoStart EQ 1,gallery_stop();set(hotspot[atuoBtn].url,%SWFPATH%/img/aut.png);,gallery_play();set(hotspot[atuoBtn].url,%SWFPATH%/img/auto.png););
+		
+	</action>
+</krpano>

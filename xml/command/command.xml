@@ -1,0 +1,121 @@
+<!--动态漫画中的动画库-->
+<krpano>
+	<!--
+	描述：清除动漫画布中的hotspot
+	-->
+	<action name="clear_hotspot_of_canvas">
+		loop_all_hotspots();
+	</action>
+	
+	<action name="loop_all_hotspots">
+		sub(i,hotspot.count,1);
+		trace('i = ',i);
+		loop_all_hotspots_next(get(i));
+	</action>
+
+	<action name="loop_all_hotspots_next">
+		indexoftxt(index,get(hotspot[get(i)].name),'canvas');
+		if(index EQ 0,removehotspot(%1););
+		dec(i);
+		trace('i = ',i);
+		if(i GE 0, loop_all_hotspots_next(get(i)) );
+	</action>
+	
+	
+	  <!--描述：根据图片生成hotspot
+	 	name hotspot 名称
+	 	url 图片参数
+	 	-->
+	<action name="buildHotspot_Img">
+		addhotspot(%1);
+		set(hotspot[%1].distorted,true);
+		set(hotspot[%1].depth,2000);
+		set(hotspot[%1].zorder,2);
+		set(hotspot[%1].visible,false);
+		set(hotspot[%1].edge,center);
+		set(hotspot[%1].url,%2);
+	</action>
+	
+	
+	<action name="buildHotspot_mask">
+		set(mask_is_onver,false);
+		addhotspot("canvas_mask");
+		set(hotspot[canvas_mask].distorted,true);
+		set(hotspot[canvas_mask].depth,2000);
+		set(hotspot[canvas_mask].zorder,8);
+		set(hotspot[canvas_mask].visible,true);
+		set(hotspot[canvas_mask].edge,center);
+		set(hotspot[canvas_mask].onover,set(mask_is_onver,true));
+		set(hotspot[canvas_mask].onout,center,set(mask_is_onver,false));
+		set(hotspot[canvas_mask].url,%SWFPATH%/img/mask.png);
+	</action>
+
+	
+	<action name="page_handle" type="javascript">
+	<![CDATA[
+		var pageObj = [
+			{
+				name: 'panorama_scrollbar_middle',
+				ox: 0,
+				url: "%SWFPATH%/img/defaultrag.png",
+				scale:1.5
+			},
+			{
+				name: 'panorama_scrollbar_left',
+				ox: -200,
+				url: "%SWFPATH%/img/left_and_right.png",
+				scale:1.5
+			},
+			{
+				name: 'panorama_scrollbar_right',
+				ox: 200,
+				url: "%SWFPATH%/img/left_and_right.png",
+				scale:1.5
+			},
+			{
+				name: 'current_page_text',
+				ox: 0,
+				url: "",
+				scale: 0.75
+			}
+		];
+		
+		for(var i in pageObj){
+			krpano.call(
+				"addhotspot('"+pageObj[i].name+"');"
+				+"set(hotspot["+pageObj[i].name+"].distorted,true);"
+				+"set(hotspot["+pageObj[i].name+"].depth,2000);"
+				+"set(hotspot["+pageObj[i].name+"].zorder,5);"
+				+"set(hotspot["+pageObj[i].name+"].visible,true);"
+				+"set(hotspot["+pageObj[i].name+"].vr_timeout,500);"
+				+"set(hotspot["+pageObj[i].name+"].oy,550);"
+				+"set(hotspot["+pageObj[i].name+"].scale,"+pageObj[i].scale+");"
+				+"set(hotspot["+pageObj[i].name+"].ox,'"+pageObj[i].ox+"');"
+				+"set(hotspot["+pageObj[i].name+"].url,'"+pageObj[i].url+"');"
+			);
+			if(pageObj[i].name=='panorama_scrollbar_left' || pageObj[i].name=='panorama_scrollbar_right'){
+				var crop_over = pageObj[i].name=='panorama_scrollbar_left'?'0|0|60|60':'0|73|60|60',
+					crop_out = pageObj[i].name=='panorama_scrollbar_left'?'68|0|60|60':'68|73|60|60'
+				krpano.call(
+					"set(hotspot["+pageObj[i].name+"].width,60);"+
+					"set(hotspot["+pageObj[i].name+"].height,60);"+
+					"set(hotspot["+pageObj[i].name+"].crop,'"+crop_out+"');"+
+					"set(hotspot["+pageObj[i].name+"].onover, set(hotspot["+pageObj[i].name+"].crop,'"+crop_over+"'));"+
+					"set(hotspot["+pageObj[i].name+"].onout, set(hotspot["+pageObj[i].name+"].crop,'"+crop_out+"'));"
+				)
+			}
+		}
+		
+		
+		krpano.call("textToImg('"+args[1]+"/"+args[2]+"','300','100','"+pageObj[3].name+"');"+
+			"set(hotspot["+pageObj[1].name+"].onclick,'select_btn_yse_no(play_last())');"+
+			"set(hotspot["+pageObj[2].name+"].onclick,'select_btn_yse_no(play_next())');"
+		);
+
+	]]>
+	</action>
+	
+
+	
+	
+</krpano>

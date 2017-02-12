@@ -1,0 +1,143 @@
+<krpano>
+	
+<!--
+	描述：初始化场景
+-->
+<action name="initScene" type="Javascript" devices="html5">
+		<![CDATA[
+		var imgs = "%SWFPATH%/img/parenting_books/01/a.jpg|%SWFPATH%/img/parenting_books/01/b.jpg|%SWFPATH%/img/parenting_books/01/c.jpg|%SWFPATH%/img/parenting_books/01/d.jpg|%SWFPATH%/img/parenting_books/01/e.jpg";
+		
+		var imgs1 = "%SWFPATH%/img/parenting_books/02/s.png|%SWFPATH%/img/parenting_books/02/s2.png|%SWFPATH%/img/parenting_books/02/s3.png";
+		
+			var imgs3 = "%SWFPATH%/img/parenting_books/03/a.jpg|%SWFPATH%/img/parenting_books/03/b.jpg";
+			
+				var imgs4 = "%SWFPATH%/img/parenting_books/04/a.jpg|%SWFPATH%/img/parenting_books/04/c.jpg|%SWFPATH%/img/parenting_books/04/yt.jpg";
+				
+				
+						var imgs05_1 = "%SWFPATH%/img/parenting_books/05/qz1.png|%SWFPATH%/img/parenting_books/05/qz2.png|%SWFPATH%/img/parenting_books/05/qz3.png";
+							var imgs05_2 = "%SWFPATH%/img/parenting_books/05/a.jpg|"+
+							"%SWFPATH%/img/parenting_books/05/b.jpg|"+
+							"%SWFPATH%/img/parenting_books/05/c.jpg|"+
+							"%SWFPATH%/img/parenting_books/05/d.jpg|"+
+							"%SWFPATH%/img/parenting_books/05/e.jpg|"+
+							"%SWFPATH%/img/parenting_books/05/f.jpg|"+
+							"%SWFPATH%/img/parenting_books/05/g.jpg|"+
+							"%SWFPATH%/img/parenting_books/05/h.jpg|"+
+							"%SWFPATH%/img/parenting_books/05/i.jpg|"+
+							"%SWFPATH%/img/parenting_books/05/j.jpg|"+
+							"%SWFPATH%/img/parenting_books/05/k.jpg";
+		window.comic_data = [[
+		{
+			type: 'music',
+			url:"%SWFPATH%/img/parenting_books/music/1.mp3",
+			delay:0
+		},
+		{
+			type: 'amin',
+			action:'hotspot_toggle_img',
+			img:imgs,
+			duration:2000,
+			repeat: 1,
+			delay:0
+		},
+		{
+			type: 'command',
+			action:'select_btn_left_right',
+			url:'%SWFPATH%/xml/scenes/parenting_books/ParentingBooksScene.xml',
+			nextPage:1,
+			lastPage:3,
+			delay:3000
+		}
+		],[{
+			type: 'music',
+			url:"%SWFPATH%/img/parenting_books/music/kim-2.mp3",
+			delay:0
+		},{
+			type: 'command',
+			action:'buildHotspot_Img',
+			name:"canvas_y",
+			img:"%SWFPATH%/img/parenting_books/02/y.jpg",
+			delay:0
+		},{
+			type: 'amin',
+			action:'hotspot_toggle_img',
+			img:imgs1,
+			duration:2000,
+			repeat: 5,
+			delay:0
+		},{
+			type: 'command',
+			action:'select_btn_left_right',
+			url:'%SWFPATH%/xml/scenes/parenting_books/ParentingBooksScene.xml',
+			nextPage:2,
+			lastPage:0,
+			delay:3000
+		}],[{
+			type: 'music',
+			url:"%SWFPATH%/img/parenting_books/music/kim-3.mp3",
+			delay:0
+		},
+		{
+			type: 'amin',
+			action:'hotspot_toggle_img',
+			img:imgs3,
+			duration:2000,
+			repeat: 5,
+			delay:0
+		},{
+			type: 'command',
+			action:'select_btn_left_right',
+			url:'%SWFPATH%/xml/scenes/parenting_books/ParentingBooksScene.xml',
+			nextPage:3,
+			lastPage:1,
+
+			delay:3000
+		}],[{
+			type: 'music',
+			url:"%SWFPATH%/img/parenting_books/music/kim-4.mp3",
+			delay:0
+		},
+		{
+			type: 'amin',
+			action:'hotspot_toggle_img',
+			img:imgs4,
+			duration:2000,
+			repeat: 5,
+			delay:0
+		},{
+			type: 'command',
+			action:'select_btn_left_right',
+			url:'%SWFPATH%/xml/scenes/parenting_books/ParentingBooksScene.xml',
+			nextPage:0,
+			lastPage:2,
+
+			delay:3000
+		}]];
+		
+		var currentPageNO=parseInt(krpano.get('page'))+1;
+		krpano.call("page_handle("+currentPageNO+","+comic_data.length+")");
+			
+		]]>
+	</action>
+	
+	<action name="play_next">
+		clearAllTimeOut();
+		clear_hotspot_of_canvas();
+		jsget(count, "comic_data.length");
+		dec(count);
+		if(page EQ count,set(page,0),inc(page););
+		txtadd(params,"page=",get(page));
+		loadpano(get(comic_xmlpath),get(params),REMOVESCENES);
+	</action>
+	<action name="play_last">
+		clearAllTimeOut();
+		clear_hotspot_of_canvas();
+		jsget(count, "comic_data.length");
+		dec(count);
+		if(page EQ 0,set(page,get(count)),dec(page););
+		txtadd(params,"page=",get(page));
+		trace(get(params));
+		loadpano(get(comic_xmlpath),get(params),REMOVESCENES);
+	</action>
+	
+</krpano>

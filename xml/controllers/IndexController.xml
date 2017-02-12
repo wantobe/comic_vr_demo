@@ -1,0 +1,137 @@
+<krpano>
+	<action name="theme_panel_toggle">
+		<!--manage_hotspots('thumb','alpha_toggle',0.1);-->
+		manage_hotspots('theme','switch');
+		manage_hotspots('index','switch');
+	</action>
+
+	<action name="traverse_styles" type="javascript"><![CDATA[
+		var styles = JSON.parse(args[1]),
+			newhostpot = function(name, data, child){
+				krpano.call("addhotspot('"+name+"')");
+				for(var i in styles.common){
+					krpano.call("set(hotspot["+name+"]."+i+","+styles.common[i]+");");
+				}
+				if(child){
+					for(var i in data.common){
+						krpano.call("set(hotspot["+name+"]."+i+","+data.common[i]+");");
+					}
+				}
+			},
+			sethotspot = function(name, data, style, child){
+				newhostpot(name, data, child);
+				for(var i in style){
+					krpano.call("set(hotspot["+name+"]."+i+","+style[i]+");");
+				}
+			},
+			traverse_data = function(data,child){
+				for(var i in data){
+					if(i=='common'){
+						continue;
+					}else if(i=='children'){
+						traverse_data(data[i],i);
+					}else{
+						sethotspot(i,data,data[i],child);
+					}
+				}
+			};
+
+		traverse_data(styles);
+	]]></action>
+
+
+	<action name="traverse_index_data" type="javascript"><![CDATA[
+		require(["json!"+args[1]+"?callbak=define"],
+			function(list_data) {
+				for(var i in list_data){
+					var list = list_data[i];
+					for(var j in list){
+						for(var x in list[j]){
+							if(x=='thumb'){
+								krpano.set("hotspot["+i+"_"+j+"].url", list[j][x]);
+							}else{
+								krpano.set("hotspot["+i+"_"+j+"]."+x, list[j][x]);
+								if(x=='motion'){
+									krpano.set("hotspot[label_"+i+"_"+j+"].alpha", list[j][x]=='true'?1:0);
+								}
+							}
+						}
+					}
+				}
+			}
+		);
+	]]></action>
+	
+	<action name="set_poster">
+		set(hotspot[poster].url,get(poster));
+		if(motion == 'true',
+			set(comic_xmlpath, '%SWFPATH%/xml/scenes/MotionComicScene.xml');
+			,
+			set(comic_xmlpath, '%SWFPATH%/xml/scenes/GalleryScene.xml');
+		);
+		set(content_data,get(data));
+		set(hotspot[play_icon].onclick, 
+			select_btn_yse_no(loadpano(get(comic_xmlpath),page=0,REMOVESCENES,BLEND(1)))
+		);
+		select_btn_yse_no(
+			manage_hotspots('index','switch');
+			manage_hotspots('poster','switch');
+		);
+
+	</action>
+	
+	<action name="set_comic_title">
+		focus_bind(name);
+		txtadd(comic_title, get(name), '_title');
+		addhotspot(get(comic_title));
+		textToImg(get(title), get(width), 30, get(comic_title),'true');
+		set(hotspot[get(comic_title)].zorder, 4);
+		set(hotspot[get(comic_title)].distorted, "true");
+		set(hotspot[get(comic_title)].class, get(class));
+		set(hotspot[get(comic_title)].depth, get(depth));
+		set(hotspot[get(comic_title)].scale, get(scale));
+		set(hotspot[get(comic_title)].vr_timeout, get(vr_timeout));
+		set(hotspot[get(comic_title)].poster, get(poster));
+		set(hotspot[get(comic_title)].href, get(href));
+		set(hotspot[get(comic_title)].ath, get(ath));
+		set(hotspot[get(comic_title)].atv, get(atv));
+		set(hotspot[get(comic_title)].edge, 'bottom');
+		set(hotspot[get(comic_title)].ox, get(ox));
+		set(hotspot[get(comic_title)].oy, calc(oy+height/2*scale));
+		set(hotspot[get(comic_title)].onclick, get(onclick));
+		set(hotspot[get(comic_title)].motion, get(motion));
+		set(hotspot[get(comic_title)].data, get(data));
+		
+		set(hotspot[get(comic_title)].onloaded,
+			if(hotspot[theme_bg].visible=='true',
+				set(visible,'false'),
+				set(visible,'true')
+			);
+		);
+	</action>
+	
+	<action name="focus_bind">
+		set(hotspot[get(%1)].onover, txtreplace(x,%1,'_title','');tween(hotspot[get(x)].depth|hotspot[calc('label_'+x)].depth|hotspot[calc(x+'_title')].depth,3800|3800|3800););
+		set(hotspot[get(%1)].onout, txtreplace(x,%1,'_title','');tween(hotspot[get(x)].depth|hotspot[calc('label_'+x)].depth|hotspot[calc(x+'_title')].depth,4000|4000|4000););
+	</action>
+	
+	<action name="theme_change">
+		if(bgId != %1,
+			txtadd(newBgIdStr,'/img/bg/',%1);
+			txtreplace(scene_index, scene[index].content, '/img/bg/%$bgId%', get(newBgIdStr));
+			txtadd(scene_index, '<krpano>', get(scene_index), '</krpano>');
+			loadxml(get(scene_index),null,null,BLEND(1));
+			set(bgId,%1);
+			jscall("localStorage.setItem('bgId',%1)");
+			index_list_init();
+			manage_hotspots('index','switch');
+			manage_hotspots('theme','switch');
+		);
+	</action>
+	
+	<action name="go_home">
+		manage_hotspots('index','switch');
+		manage_hotspots('poster','switch');
+	</action>
+	
+</krpano>

@@ -1,0 +1,59 @@
+{
+	"new": [{
+		"title": "死亡名单",
+		"motion": "true",
+		"thumb": "%SWFPATH%/img/bodycount/new.jpg",
+		"poster": "%SWFPATH%/img/bodycount/poster.jpg",
+		"data": "../data/bodycount_data.json"
+	}],
+	"recommend": [{
+		"title": "超西游",
+		"motion": "false",
+		"thumb": "%SWFPATH%/img/static_comic/chaoxiyou/recommend.jpg",
+		"poster": "%SWFPATH%/img/static_comic/chaoxiyou/poster.jpg",
+		"data": "../data/chaoxiyou.json"
+	}, {
+		"title": "独闯天涯",
+		"motion": "false",
+		"thumb": "%SWFPATH%/img/static_comic/duchuangtianya/recommend.jpg",
+		"poster": "%SWFPATH%/img/static_comic/duchuangtianya/poster.jpg",
+		"data": "../data/duchuangtianya.json"
+	}, {
+		"title": "科学战士",
+		"motion": "false",
+		"thumb": "%SWFPATH%/img/static_comic/kexuezhanshi/recommend.jpg",
+		"poster": "%SWFPATH%/img/static_comic/kexuezhanshi/poster.jpg",
+		"data": "../data/kexuezhanshi.json"
+	}, {
+		"title": "大唐除妖司",
+		"motion": "false",
+		"thumb": "%SWFPATH%/img/static_comic/dtcys/recommend.jpg",
+		"poster": "%SWFPATH%/img/static_comic/dtcys/poster.jpg",
+		"data": "../data/dtcys.json"
+	}],
+	"hot": [{
+		"title": "迷域行者",
+		"motion": "true",
+		"thumb": "%SWFPATH%/img/puzzle_domain_walker/hot.jpg",
+		"poster": "%SWFPATH%/img/puzzle_domain_walker/poster.jpg",
+		"data": "../data/puzzle_domain_walker_data.json"
+	}, {
+		"title": "双栖迷宫",
+		"motion": "false",
+		"thumb": "%SWFPATH%/img/static_comic/shuangqimigong/hot.jpg",
+		"poster": "%SWFPATH%/img/static_comic/shuangqimigong/poster.jpg",
+		"data": "../data/shuangqimigong.json"
+	}, {
+		"title": "浪漫传说",
+		"motion": "false",
+		"thumb": "%SWFPATH%/img/static_comic/langmanchuanshuo/hot.jpg",
+		"poster": "%SWFPATH%/img/static_comic/langmanchuanshuo/poster.jpg",
+		"data": "../data/langmanchuanshuo.json"
+	}, {
+		"title": "Lily",
+		"motion": "false",
+		"thumb": "%SWFPATH%/img/static_comic/Lily/hot.jpg",
+		"poster": "%SWFPATH%/img/static_comic/Lily/poster.jpg",
+		"data": "../data/Lily.json"
+	}]
+}

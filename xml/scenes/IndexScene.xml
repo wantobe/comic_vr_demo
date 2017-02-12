@@ -1,0 +1,352 @@
+<krpano onstart="loadscene(index)">
+	<include url="%SWFPATH%/xml/common.xml" />
+	<include url="%SWFPATH%/xml/controllers/IndexController.xml" />
+	<include url="%SWFPATH%/plugins/webvr.xml" />
+	
+	<scene name="index" onstart="index_list_init();">
+		<view fovtype="VFOV" limitview="lookat" fov="90" fovmin="20" fovmax="160" />
+		<preview url="%SWFPATH%/img/bg/%$bgId%/preview.jpg" />
+		<image fov="10.0">
+			<cube url="%SWFPATH%/img/bg/%$bgId%/mobile_%s.jpg" />
+		</image>
+		
+		<hotspot name="logo" url="%SWFPATH%/img/index/logo.png" 
+			distorted="true"
+			scale="4.0"
+			depth="4000"
+			zorder="3"
+			oy="-1400" 
+			onover="tween(scale,4.2);" 
+			onout="tween(scale,4);" 
+			onclick="webvr.enterVR();"/>
+		
+		<action name="index_list_init" type="javascript"><![CDATA[		
+			
+			var styles = {
+			    common: {
+			        class: "index",
+			        depth: 4000,
+			        zorder: 2,
+			        scale: 4,
+			        distorted: "true",
+			        vr_timeout: 1000,
+			        onloaded: "set_comic_title();",
+			        onclick: "set_poster()"
+			    },
+			    new_0: {
+			        ath: -56,
+			        atv: 0,
+			        ox: 0,
+			        oy: 0,
+			        width: 420,
+			        height: 420
+			    },
+			    recommend_0: {
+			    	ath: 0,
+			    	atv: 0,
+			        ox: -580,
+			        oy: -450,
+			        width: 280,
+			        height: 216
+			    },
+			    recommend_1: {
+			    	ath: 0,
+			    	atv: 0,
+			        ox: 580,
+			        oy: -450,
+			        width: 280,
+			        height: 216
+			    },
+			    recommend_2: {
+			    	ath: 0,
+			    	atv: 0,
+			        ox: -580,
+			        oy: 450,
+			        width: 280,
+			        height: 216
+			    },
+			    recommend_3: {
+			        ox: 580,
+			        oy: 450,
+			        width: 280,
+			        height: 216
+			    },
+			    hot_0: {
+			        ath: 52,
+			        atv: 0,
+			        ox: 0,
+			        oy: -550,
+			        width: 344,
+			        height: 130
+			    },
+			    hot_1: {
+			        ath: 52,
+			        atv: 0,
+			        ox: -352,
+			        oy: 0,
+			        width: 168,
+			        height: 130
+			    },
+			    hot_2: {
+			        ath: 52,
+			        atv: 0,
+			        ox: 352,
+			        oy: 0,
+			        width: 168,
+			        height: 130
+			    },
+			    hot_3: {
+			        ath: 52,
+			        atv: 0,
+			        ox: 0,
+			        oy: 550,
+			        width: 344,
+			        height: 130
+			    },
+			    children: {
+			        common: {
+			            onclick: "",
+			            onover: "",
+			            onout: "",
+			            onloaded: "",
+			            zorder: 3,
+			            alpha: 0
+			        },
+			        label_new_0: {
+			            url: "%SWFPATH%/img/index/label.png",
+			            ath: -56,
+			            ox: 620,
+			            oy: -620
+			        },
+			        label_recommend_0: {
+			            url: "%SWFPATH%/img/index/label.png",
+			            scale: 2.5,
+			            ath: 0,
+			            ox: -160,
+			            oy: -748
+			        },
+			        label_recommend_1: {
+			            url: "%SWFPATH%/img/index/label.png",
+			            scale: 2.5,
+			            ath: 0,
+			            ox: 1000,
+			            oy: -748
+			        },
+			        label_recommend_2: {
+			            url: "%SWFPATH%/img/index/label.png",
+			            scale: 2.5,
+			            ath: 0,
+			            ox: -160,
+			            oy: 155
+			        },
+			        label_recommend_3: {
+			            url: "%SWFPATH%/img/index/label.png",
+			            scale: 2.5,
+			            ath: 0,
+			            ox: 1000,
+			            oy: 155
+			        },
+			        label_hot_0: {
+			            url: "%SWFPATH%/img/index/label.png",
+			            ath: 52,
+			            scale: 2.0,
+			            ox: 580,
+			            oy: -700
+			        },
+			        label_hot_1: {
+			            url: "%SWFPATH%/img/index/label.png",
+			            ath: 52,
+			            scale: 2.0,
+			            ox: -130,
+			            oy: -150
+			        },
+			        label_hot_2: {
+			            url: "%SWFPATH%/img/index/label.png",
+			            ath: 52,
+			            scale: 2.0,
+			            ox: 580,
+			            oy: -150
+			        },
+			        label_hot_3: {
+			            url: "%SWFPATH%/img/index/label.png",
+			            ath: 52,
+			            scale: 2.0,
+			            ox: 580,
+			            oy: 400
+			        },
+			        children: {
+			        	common: {
+				            onclick: "",
+				            onover: "",
+			            	onout: "",
+			            	onloaded: ""
+				        },
+			        	title_new: {
+				            url: "%SWFPATH%/img/index/new.png",
+				            oy: -960,
+				            ath: -56
+				        },
+				        title_recommend: {
+				            url: "%SWFPATH%/img/index/recommend.png",
+				            oy: -1000,
+				            ath: 0
+				        },
+				        title_hot: {
+				            url: "%SWFPATH%/img/index/hot.png",
+				            oy: -920,
+				            ath: 52
+				        },
+				        title_theme: {
+				            class: "theme",
+				            visible: "false",
+				            url: "%SWFPATH%/img/index/theme.png",
+				            oy: -1000,
+				            ath: 0
+				        }
+			        }
+			    }
+			};
+			
+			
+			krpano.call(
+				"traverse_styles('"+JSON.stringify(styles)+"');"+
+				"traverse_index_data(get(indexData));"+
+				"theme_panel_init();"+
+				"poster_panel_init();"
+			);
+			
+	
+		]]></action>
+		
+		<action name="theme_panel_init" type="javascript"><![CDATA[
+			var styles = {
+				common:{
+					class:"theme",
+					depth:4000,
+					zorder:3,
+					vr_timeout:500,
+					distorted:"true",
+					visible:"false"
+				},
+				theme_bg:{
+					url:"%SWFPATH%/img/index/theme_bg.png", 
+					width:1600,
+					height:900,
+					scale:1.6,
+					alpha:1
+				},
+				button_theme:{
+					class:"index theme",
+					url:"%SWFPATH%/img/index/skin.png",
+					ox:1020,
+					oy:-1000,
+					scale:2.5,
+					visible:"true",
+					onover:"tween(scale,3)",
+					onout:"tween(scale,2.5)",
+					onclick:"select_btn_yse_no(theme_panel_toggle());"
+				},
+				button_close:{
+					 url:"%SWFPATH%/img/index/close.png",
+					 oy:1100,
+					 scale:2.0,
+					 onover:"tween(scale,2.2)",
+					 onout:"tween(scale,2.0)",
+					 onclick:"theme_panel_toggle()"
+				},
+				children:{
+					common:{
+						scale:1.0,
+						zorder:4,
+						width:690,
+						height:520,
+						onover:"tween(scale,1.1)",
+						onout:"tween(scale,1.0)"
+					},
+					item_0:{	
+						url:"%SWFPATH%/img/bg/0/mobile_b.jpg",
+						ox:-800,
+						oy:-300,
+						onclick:"select_btn_yse_no(theme_change(0))"
+					},
+					item_1:{
+						url:"%SWFPATH%/img/bg/1/mobile_f.jpg",
+						ox:0,
+						oy:-300,
+						onclick:"select_btn_yse_no(theme_change(1))"
+					},
+					item_2:{
+						url:"%SWFPATH%/img/bg/2/mobile_b.jpg",
+						ox:800,
+						oy:-300,
+						onclick:"select_btn_yse_no(theme_change(2))"
+					},
+					item_3:{
+						url:"%SWFPATH%/img/bg/3/mobile_l.jpg",
+						ox:-800,
+						oy:300,
+						onclick:"select_btn_yse_no(theme_change(3))"
+					},
+					item_4:{
+						url:"%SWFPATH%/img/bg/4/mobile_u.jpg",
+						ox:0,
+						oy:300,
+						onclick:"select_btn_yse_no(theme_change(4))"
+					},
+					item_5:{
+						url:"%SWFPATH%/img/bg/5/mobile_f.jpg",
+						ox:800,
+						oy:300,
+						onclick:"select_btn_yse_no(theme_change(5))"
+					}
+				}
+			};
+			
+			krpano.call("traverse_styles('"+JSON.stringify(styles)+"')");
+	
+		]]></action>
+
+		<action name="poster_panel_init" type="javascript"><![CDATA[
+			var styles = {
+				common:{
+					class:"poster",
+					distorted:"true",
+					depth:2000,
+					zorder:3,
+					visible:"false",
+					vr_timeout:500
+				},
+				home_btn:{
+					url:"%SWFPATH%/img/home.png",
+					width:120,
+					height:"prop",
+					oy:600,
+					onover:"tween(scale,1.2)",
+					onout:"tween(scale,1.0)",
+					onclick:"select_btn_yse_no(go_home())"
+				},
+				poster:{
+					url:"%SWFPATH%/img/parenting_books/cover.jpg" ,
+					width:1000,
+					height:"560",
+					scale:1.6
+				},
+				play_icon:{
+					url:"%SWFPATH%/img/play.png" ,
+					width:150,
+					height:"prop",
+					scale:1.5,
+					alpha:0.8,
+					onover:"tween(scale,2)",
+					onout:"tween(scale,1.5)"
+				},
+			};
+			
+			krpano.call("traverse_styles('"+JSON.stringify(styles)+"')");
+
+		]]></action>
+		
+				
+	</scene>
+
+</krpano>
