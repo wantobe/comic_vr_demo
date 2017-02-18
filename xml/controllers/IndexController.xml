@@ -1,8 +1,21 @@
 <krpano>
-	<action name="theme_panel_toggle">
-		<!--manage_hotspots('thumb','alpha_toggle',0.1);-->
-		manage_hotspots('theme','switch');
-		manage_hotspots('index','switch');
+	
+	<action name="manage_hotspots">
+    for(set(i, 0), i LT hotspot.count, inc(i), 
+        indexoftxt(sindex, get(hotspot[get(i)].class), %1);
+        if(sindex GE 0, 
+        	if(%2=='switch', switch(hotspot[get(i)].visible));
+        	if(%2=='alpha_toggle', switch(hotspot[get(i)].alpha, 0.1, 1));
+        );
+    );
+	</action>
+	
+	<action name="go_theme">
+		if(hotspot[theme_bg].visible=='true',
+			loadscene('index',,KEEPVIEW,BLEND(0.5)),
+			loadscene('theme_panel',,KEEPVIEW,BLEND(0.5))
+		);
+		
 	</action>
 
 	<action name="traverse_styles" type="javascript"><![CDATA[
@@ -39,7 +52,6 @@
 		traverse_data(styles);
 	]]></action>
 
-
 	<action name="traverse_index_data" type="javascript"><![CDATA[
 		require(["json!"+args[1]+"?callbak=define"],
 			function(list_data) {
@@ -62,76 +74,415 @@
 		);
 	]]></action>
 	
-	<action name="set_poster">
-		set(hotspot[poster].url,get(poster));
-		if(motion == 'true',
-			set(comic_xmlpath, '%SWFPATH%/xml/scenes/MotionComicScene.xml');
-			,
-			set(comic_xmlpath, '%SWFPATH%/xml/scenes/GalleryScene.xml');
-		);
-		set(content_data,get(data));
-		set(hotspot[play_icon].onclick, 
-			select_btn_yse_no(loadpano(get(comic_xmlpath),page=0,REMOVESCENES,BLEND(1)))
-		);
+	<action name="go_poster">
+		copy(poster_,poster);
+		copy(data_,data);
+		copy(motion_,motion);
 		select_btn_yse_no(
-			manage_hotspots('index','switch');
-			manage_hotspots('poster','switch');
+			loadscene('poster_panel',poster=get:poster_&amp;data=get:data_&amp;motion=get:motion_,,BLEND(0.5));
 		);
-
 	</action>
 	
-	<action name="set_comic_title">
-		focus_bind(name);
-		txtadd(comic_title, get(name), '_title');
-		addhotspot(get(comic_title));
-		textToImg(get(title), get(width), 30, get(comic_title),'true');
-		set(hotspot[get(comic_title)].zorder, 4);
-		set(hotspot[get(comic_title)].distorted, "true");
-		set(hotspot[get(comic_title)].class, get(class));
-		set(hotspot[get(comic_title)].depth, get(depth));
-		set(hotspot[get(comic_title)].scale, get(scale));
-		set(hotspot[get(comic_title)].vr_timeout, get(vr_timeout));
-		set(hotspot[get(comic_title)].poster, get(poster));
-		set(hotspot[get(comic_title)].href, get(href));
-		set(hotspot[get(comic_title)].ath, get(ath));
-		set(hotspot[get(comic_title)].atv, get(atv));
-		set(hotspot[get(comic_title)].edge, 'bottom');
-		set(hotspot[get(comic_title)].ox, get(ox));
-		set(hotspot[get(comic_title)].oy, calc(oy+height/2*scale));
-		set(hotspot[get(comic_title)].onclick, get(onclick));
-		set(hotspot[get(comic_title)].motion, get(motion));
-		set(hotspot[get(comic_title)].data, get(data));
-		
-		set(hotspot[get(comic_title)].onloaded,
-			if(hotspot[theme_bg].visible=='true',
-				set(visible,'false'),
-				set(visible,'true')
-			);
+	<action name="set_poster">
+		set(hotspot[poster].url,get(poster));
+		def(comic,object);
+		if(motion == 'true',
+			def(comic.xmlpath, string, '%SWFPATH%/xml/scenes/MotionComicScene.xml');
+			def(comic.scene, string, 'motionComic');
+			,
+			def(comic.xmlpath, string, '%SWFPATH%/xml/scenes/GalleryScene.xml');
+			def(comic.scene, string, 'gallery');
 		);
+		set(content_data,get(data));
+		set(hotspot[play_icon].onclick, go_comic(get(comic.xmlpath),get(comic.scene)));
+	</action>
+	
+	<action name="go_comic">
+		select_btn_yse_no(
+			loadpanoscene(%1,%2,page=0,REMOVESCENES,BLEND(0.5));
+			tween(hotspot[logo].alpha,0);
+		)
+	</action>
+	
+	<action name="set_comic_title" type="javascript">
+		<![CDATA[
+		krpano.call("focus_bind("+caller.name+")");
+		
+		var comic_title = caller.name+'_title',
+			oy = parseInt(caller.oy)+caller.height/2*caller.scale;
+			params = {
+				name:comic_title,
+				text:caller.title,
+				width:caller.width,
+				height:30,
+				color:'#ffffff',
+				background:'rgba(0,0,0,0.5)'
+			};
+		params = JSON.stringify(params);
+		krpano.call(
+			"text2image('"+params+"');"+
+			"set(hotspot["+comic_title+"].zorder, 4);"+
+			"set(hotspot["+comic_title+"].distorted, 'true');"+
+			"set(hotspot["+comic_title+"].depth, "+caller.depth+");"+
+			"set(hotspot["+comic_title+"].scale, "+caller.scale+");"+
+			"set(hotspot["+comic_title+"].vr_timeout, "+caller.vr_timeout+");"+
+			"set(hotspot["+comic_title+"].poster, "+caller.poster+");"+
+			"set(hotspot["+comic_title+"].href, "+caller.href+");"+
+			"set(hotspot["+comic_title+"].ath, "+caller.ath+");"+
+			"set(hotspot["+comic_title+"].atv, "+caller.atv+");"+
+			"set(hotspot["+comic_title+"].edge, 'bottom');"+
+			"set(hotspot["+comic_title+"].ox, "+caller.ox+");"+
+			"set(hotspot["+comic_title+"].oy, "+oy+");"+
+			"set(hotspot["+comic_title+"].onclick, "+caller.onclick+");"+
+			"set(hotspot["+comic_title+"].motion, "+caller.motion+");"+
+			"set(hotspot["+comic_title+"].data, "+caller.data+");"
+		);
+		]]>
 	</action>
 	
 	<action name="focus_bind">
-		set(hotspot[get(%1)].onover, txtreplace(x,%1,'_title','');tween(hotspot[get(x)].depth|hotspot[calc('label_'+x)].depth|hotspot[calc(x+'_title')].depth,3800|3800|3800););
-		set(hotspot[get(%1)].onout, txtreplace(x,%1,'_title','');tween(hotspot[get(x)].depth|hotspot[calc('label_'+x)].depth|hotspot[calc(x+'_title')].depth,4000|4000|4000););
+		set(hotspot[%1].onover, tween(hotspot[%1].depth|hotspot[label_%1].depth|hotspot[%1_title].depth,3800|3800|3800););
+		set(hotspot[%1].onout, tween(hotspot[%1].depth|hotspot[label_%1].depth|hotspot[%1_title].depth,4000|4000|4000););
 	</action>
 	
 	<action name="theme_change">
 		if(bgId != %1,
-			txtadd(newBgIdStr,'/img/bg/',%1);
-			txtreplace(scene_index, scene[index].content, '/img/bg/%$bgId%', get(newBgIdStr));
-			txtadd(scene_index, '<krpano>', get(scene_index), '</krpano>');
-			loadxml(get(scene_index),null,null,BLEND(1));
-			set(bgId,%1);
 			jscall("localStorage.setItem('bgId',%1)");
-			index_list_init();
-			manage_hotspots('index','switch');
-			manage_hotspots('theme','switch');
+			loadscene('theme_panel',bgId=%1,KEEPVIEW,(BLEND(0.5)));
 		);
 	</action>
 	
 	<action name="go_home">
-		manage_hotspots('index','switch');
-		manage_hotspots('poster','switch');
+		select_btn_yse_no(loadscene('index',,,BLEND(0.5)));
 	</action>
+	
+	<action name="index_list_init" type="javascript"><![CDATA[		
+			
+		var styles = {
+		    common: {
+		        depth: 4000,
+		        zorder: 2,
+		        scale: 4,
+		        distorted: "true",
+		        vr_timeout: 1000,
+		        onloaded: "set_comic_title();",
+		        onclick: "go_poster()"
+		    },
+		    new_0: {
+		        ath: -56,
+		        atv: 0,
+		        ox: 0,
+		        oy: 0,
+		        width: 420,
+		        height: 420
+		    },
+		    recommend_0: {
+		    	ath: 0,
+		    	atv: 0,
+		        ox: -580,
+		        oy: -450,
+		        width: 280,
+		        height: 216
+		    },
+		    recommend_1: {
+		    	ath: 0,
+		    	atv: 0,
+		        ox: 580,
+		        oy: -450,
+		        width: 280,
+		        height: 216
+		    },
+		    recommend_2: {
+		    	ath: 0,
+		    	atv: 0,
+		        ox: -580,
+		        oy: 450,
+		        width: 280,
+		        height: 216
+		    },
+		    recommend_3: {
+		        ox: 580,
+		        oy: 450,
+		        width: 280,
+		        height: 216
+		    },
+		    hot_0: {
+		        ath: 52,
+		        atv: 0,
+		        ox: 0,
+		        oy: -550,
+		        width: 344,
+		        height: 130
+		    },
+		    hot_1: {
+		        ath: 52,
+		        atv: 0,
+		        ox: -352,
+		        oy: 0,
+		        width: 168,
+		        height: 130
+		    },
+		    hot_2: {
+		        ath: 52,
+		        atv: 0,
+		        ox: 352,
+		        oy: 0,
+		        width: 168,
+		        height: 130
+		    },
+		    hot_3: {
+		        ath: 52,
+		        atv: 0,
+		        ox: 0,
+		        oy: 550,
+		        width: 344,
+		        height: 130
+		    },
+		    children: {
+		        common: {
+		            onclick: "",
+		            onover: "",
+		            onout: "",
+		            onloaded: "",
+		            zorder: 3,
+		            alpha: 0
+		        },
+		        label_new_0: {
+		            url: "%SWFPATH%/img/index/label.png",
+		            ath: -56,
+		            ox: 620,
+		            oy: -620
+		        },
+		        label_recommend_0: {
+		            url: "%SWFPATH%/img/index/label.png",
+		            scale: 2.5,
+		            ath: 0,
+		            ox: -160,
+		            oy: -748
+		        },
+		        label_recommend_1: {
+		            url: "%SWFPATH%/img/index/label.png",
+		            scale: 2.5,
+		            ath: 0,
+		            ox: 1000,
+		            oy: -748
+		        },
+		        label_recommend_2: {
+		            url: "%SWFPATH%/img/index/label.png",
+		            scale: 2.5,
+		            ath: 0,
+		            ox: -160,
+		            oy: 155
+		        },
+		        label_recommend_3: {
+		            url: "%SWFPATH%/img/index/label.png",
+		            scale: 2.5,
+		            ath: 0,
+		            ox: 1000,
+		            oy: 155
+		        },
+		        label_hot_0: {
+		            url: "%SWFPATH%/img/index/label.png",
+		            ath: 52,
+		            scale: 2.0,
+		            ox: 580,
+		            oy: -700
+		        },
+		        label_hot_1: {
+		            url: "%SWFPATH%/img/index/label.png",
+		            ath: 52,
+		            scale: 2.0,
+		            ox: -130,
+		            oy: -150
+		        },
+		        label_hot_2: {
+		            url: "%SWFPATH%/img/index/label.png",
+		            ath: 52,
+		            scale: 2.0,
+		            ox: 580,
+		            oy: -150
+		        },
+		        label_hot_3: {
+		            url: "%SWFPATH%/img/index/label.png",
+		            ath: 52,
+		            scale: 2.0,
+		            ox: 580,
+		            oy: 400
+		        },
+		        children: {
+		        	common: {
+			            onclick: "",
+			            onover: "",
+		            	onout: "",
+		            	onloaded: ""
+			        },
+		        	title_new: {
+			            url: "%SWFPATH%/img/index/new.png",
+			            oy: -960,
+			            ath: -56
+			        },
+			        title_recommend: {
+			            url: "%SWFPATH%/img/index/recommend.png",
+			            oy: -1000,
+			            ath: 0
+			        },
+			        title_hot: {
+			            url: "%SWFPATH%/img/index/hot.png",
+			            oy: -920,
+			            ath: 52
+			        },
+			        button_theme:{
+						class:"index theme",
+						url:"%SWFPATH%/img/index/skin.png",
+						ox:1020,
+						oy:-1000,
+						scale:2.5,
+						visible:"true",
+						onover:"tween(scale,3)",
+						onout:"tween(scale,2.5)",
+						onclick:"select_btn_yse_no(go_theme());"
+					}
+		        }
+		    }
+		};
+		
+		
+		krpano.call(
+			"traverse_styles('"+JSON.stringify(styles)+"');"+
+			"traverse_index_data(get(indexData));"
+		);
+		
+
+	]]></action>
+	
+	<action name="theme_panel_init" type="javascript"><![CDATA[
+		var styles = {
+			common:{
+				depth:4000,
+				zorder:3,
+				vr_timeout:500,
+				distorted:"true"
+			},
+			title_theme: {
+	            scale:4,
+	            url: "%SWFPATH%/img/index/theme.png",
+	            oy: -1000,
+	            ath: 0
+	        },
+	        button_theme:{
+				url:"%SWFPATH%/img/index/skin.png",
+				ox:1020,
+				oy:-1000,
+				scale:2.5,
+				visible:"true",
+				onover:"tween(scale,3)",
+				onout:"tween(scale,2.5)",
+				onclick:"select_btn_yse_no(go_theme());"
+			},
+			theme_bg:{
+				url:"%SWFPATH%/img/index/theme_bg.png", 
+				width:1600,
+				height:900,
+				scale:1.6,
+				alpha:1
+			},
+			button_close:{
+				 url:"%SWFPATH%/img/index/close.png",
+				 oy:1100,
+				 scale:2.0,
+				 onover:"tween(scale,2.2)",
+				 onout:"tween(scale,2.0)",
+				 onclick:"go_theme()"
+			},
+			children:{
+				common:{
+					scale:1.0,
+					zorder:4,
+					width:690,
+					height:520,
+					onover:"tween(scale,1.1)",
+					onout:"tween(scale,1.0)"
+				},
+				item_0:{	
+					url:"%SWFPATH%/img/bg/0/mobile_b.jpg",
+					ox:-800,
+					oy:-300,
+					onclick:"select_btn_yse_no(theme_change(0))"
+				},
+				item_1:{
+					url:"%SWFPATH%/img/bg/1/mobile_f.jpg",
+					ox:0,
+					oy:-300,
+					onclick:"select_btn_yse_no(theme_change(1))"
+				},
+				item_2:{
+					url:"%SWFPATH%/img/bg/2/mobile_b.jpg",
+					ox:800,
+					oy:-300,
+					onclick:"select_btn_yse_no(theme_change(2))"
+				},
+				item_3:{
+					url:"%SWFPATH%/img/bg/3/mobile_l.jpg",
+					ox:-800,
+					oy:300,
+					onclick:"select_btn_yse_no(theme_change(3))"
+				},
+				item_4:{
+					url:"%SWFPATH%/img/bg/4/mobile_u.jpg",
+					ox:0,
+					oy:300,
+					onclick:"select_btn_yse_no(theme_change(4))"
+				},
+				item_5:{
+					url:"%SWFPATH%/img/bg/5/mobile_f.jpg",
+					ox:800,
+					oy:300,
+					onclick:"select_btn_yse_no(theme_change(5))"
+				}
+			}
+		};
+		
+		krpano.call("traverse_styles('"+JSON.stringify(styles)+"')");
+
+	]]></action>
+	
+	<action name="poster_panel_init" type="javascript"><![CDATA[
+		var styles = {
+			common:{
+				distorted:"true",
+				depth:2000,
+				zorder:3,
+				vr_timeout:500
+			},
+			home_btn:{
+				url:"%SWFPATH%/img/home.png",
+				width:120,
+				height:"prop",
+				oy:600,
+				onover:"tween(scale,1.2)",
+				onout:"tween(scale,1.0)",
+				onclick:"go_home()"
+			},
+			poster:{
+				url:"" ,
+				width:1000,
+				height:"560",
+				scale:1.6
+			},
+			play_icon:{
+				url:"%SWFPATH%/img/play.png" ,
+				width:150,
+				height:"prop",
+				scale:1.5,
+				alpha:0.8,
+				onover:"tween(scale,2)",
+				onout:"tween(scale,1.5)"
+			},
+		};
+		
+		krpano.call("traverse_styles('"+JSON.stringify(styles)+"');set_poster();");
+
+	]]></action>
+		
 	
 </krpano>

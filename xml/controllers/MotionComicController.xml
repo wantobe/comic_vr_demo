@@ -21,19 +21,24 @@
 		jsget(count, "comic_data.length");
 		dec(count);
 		if(page EQ count,set(page,0),inc(page););
-		txtadd(params,"page=",get(page));
-		loadpano("%SWFPATH%/xml/scenes/DynamicComicScene.xml",get(params),REMOVESCENES);
+		loadscene(get(xml.scene), page=get:page,,BLEND(0.2));
 	</action>
-	<action name="play_last">
+	<action name="play_prev">
 		clearAllTimeOut();
 		clear_hotspot_of_canvas();
 		jsget(count, "comic_data.length");
 		dec(count);
 		if(page EQ 0,set(page,get(count)),dec(page););
-		txtadd(params,"page=",get(page));
-		trace(get(params));
-		loadpano("%SWFPATH%/xml/scenes/DynamicComicScene.xml",get(params),REMOVESCENES);
+		loadscene(get(xml.scene), page=get:page,,BLEND(0.2));
 	</action>
 	
+	<action name="go_home">
+		select_btn_yse_no(
+			clearAllTimeOut();
+			<!--clear_hotspot_of_canvas();-->
+			loadpanoscene(%SWFPATH%/xml/scenes/IndexScene.xml,'index',null,null,BLEND(0.5));
+			tween(hotspot[logo].alpha,1);
+		);
+	</action>
 	
 </krpano>

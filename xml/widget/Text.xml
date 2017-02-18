@@ -1,0 +1,54 @@
+<krpano>
+	<action name="text2image" type="Javascript" devices="html5">
+		<![CDATA[
+		/* 将文字生成图片，并生成/关联一个hotspot，将其url设置成该图片的base64 DataUrl
+		 *
+		 * @param {Object} args[1]	格式如下：
+		 	{
+				name:string,		hotspot的name
+				text:string,		显示的文字
+				width:number,		hotspot的宽
+				height:number,		hotspot的高
+				color:string,		文字颜色css格式
+				background:string	背景色
+			};
+		 */
+		
+			var params = JSON.parse(args[1]),
+				canvas = document.createElement("canvas"),
+				context = canvas.getContext('2d'),
+				text = params.text,
+				textMetrics = context.measureText(text),
+				start_x = 0,
+				fontSize = params.height,
+				color = "rgb(255,255,255)",
+				background = "rgba(0,0,0,0)";
+			canvas.width = params.width;
+			canvas.height= params.height;
+			
+			if(textMetrics.width>canvas.width){
+				context.textAlign = 'left'; //设置文本的水平对对齐方式
+				start_x = 0;
+			}else {
+				context.textAlign = 'center'; //设置文本的水平对对齐方式
+				start_x = canvas.width/2;
+			}
+			
+			background = params.background?params.background:background;
+			context.fillStyle = background;
+			context.fillRect(0, 0, canvas.width, canvas.height);
+			fontSize *= 0.7;
+			color = params.color?params.color:color;
+			context.fillStyle = color;
+			context.font = 'normal' + ' ' + fontSize + 'px Microsoft YaHei ';	
+			context.textBaseline = 'middle';//设置文本的垂直对齐方式	
+			context.fillText(text, start_x, canvas.height/2);
+			//var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+			
+			krpano.call("if(hotspot["+params.name+"].name,,addhotspot("+params.name+"))");
+        	krpano.set("hotspot["+params.name+"].url",canvas.toDataURL("image/png"));
+        	krpano.set("hotspot["+params.name+"].width",canvas.width);
+        	krpano.set("hotspot["+params.name+"].height",canvas.height);
+		]]>
+	</action>
+</krpano>

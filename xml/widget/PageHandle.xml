@@ -1,0 +1,72 @@
+<krpano>
+	<action name="page_handle" type="javascript">
+	<![CDATA[
+		var pageObj = [
+			{
+				name: 'panorama_scrollbar_middle',
+				ox: 0,
+				url: "%SWFPATH%/img/defaultrag.png",
+				scale:1.5
+			},
+			{
+				name: 'panorama_scrollbar_left',
+				ox: -200,
+				url: "%SWFPATH%/img/left_and_right.png",
+				scale:1.5
+			},
+			{
+				name: 'panorama_scrollbar_right',
+				ox: 200,
+				url: "%SWFPATH%/img/left_and_right.png",
+				scale:1.5
+			},
+			{
+				name: 'current_page_text',
+				ox: 0,
+				url: "",
+				scale: 0.75
+			}
+		];
+		
+		for(var i in pageObj){
+			krpano.call(
+				"addhotspot('"+pageObj[i].name+"');"
+				+"set(hotspot["+pageObj[i].name+"].distorted,true);"
+				+"set(hotspot["+pageObj[i].name+"].depth,2000);"
+				+"set(hotspot["+pageObj[i].name+"].zorder,5);"
+				+"set(hotspot["+pageObj[i].name+"].visible,true);"
+				+"set(hotspot["+pageObj[i].name+"].vr_timeout,500);"
+				+"set(hotspot["+pageObj[i].name+"].oy,550);"
+				+"set(hotspot["+pageObj[i].name+"].scale,"+pageObj[i].scale+");"
+				+"set(hotspot["+pageObj[i].name+"].ox,'"+pageObj[i].ox+"');"
+				+"set(hotspot["+pageObj[i].name+"].url,'"+pageObj[i].url+"');"
+			);
+			if(pageObj[i].name=='panorama_scrollbar_left' || pageObj[i].name=='panorama_scrollbar_right'){
+				var crop_over = pageObj[i].name=='panorama_scrollbar_left'?'0|0|60|60':'0|73|60|60',
+					crop_out = pageObj[i].name=='panorama_scrollbar_left'?'68|0|60|60':'68|73|60|60'
+				krpano.call(
+					"set(hotspot["+pageObj[i].name+"].width,60);"+
+					"set(hotspot["+pageObj[i].name+"].height,60);"+
+					"set(hotspot["+pageObj[i].name+"].crop,'"+crop_out+"');"+
+					"set(hotspot["+pageObj[i].name+"].onover, set(hotspot["+pageObj[i].name+"].crop,'"+crop_over+"'));"+
+					"set(hotspot["+pageObj[i].name+"].onout, set(hotspot["+pageObj[i].name+"].crop,'"+crop_out+"'));"
+				)
+			}
+		}
+		
+		var params = {
+			name:pageObj[3].name,
+			text:args[1]+"/"+args[2],
+			width:300,
+			height:100
+		};
+		params = "'"+JSON.stringify(params)+"'";
+		
+		krpano.call("text2image("+params+");"+
+			"set(hotspot["+pageObj[1].name+"].onclick,'select_btn_yse_no(play_prev())');"+
+			"set(hotspot["+pageObj[2].name+"].onclick,'select_btn_yse_no(play_next())');"
+		);
+
+	]]>
+	</action>
+</krpano>

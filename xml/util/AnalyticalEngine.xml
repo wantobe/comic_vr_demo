@@ -188,7 +188,7 @@
 	<action name="initTurnPage">
 		txtadd(next,"loadpano(",%1,",","page=",%2,",KEEPSCENES)");
 		txtadd(last,"loadpano(",%1,",","page=",%3,",KEEPSCENES)");
-		if(mask_is_onver EQ true,trace("true");select_btn_left_right(play_last(),play_next()););
+		if(mask_is_onver EQ true,trace("true");select_btn_left_right(play_prev(),play_next()););
 	</action>
 	
 	
