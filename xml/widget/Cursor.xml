@@ -3,12 +3,12 @@
 	<hotspot name="select_btn"
 		visible="false"
 		distorted="true"
-		width="493"
+		width="494"
 		keep="true"
-		height="493"
-		zorder="6"
+		height="494"
+		zorder="10"
 		url="%SWFPATH%/img/select_btn/select_btn.png"
-		depth="4000"
+		depth="2000"
 		onover= "vr_btn_over()"
 		onout="vr_btn_out()"
 		/>
@@ -20,8 +20,8 @@
 		oy="-160"
 		keep="true"
 		zorder="10"
-		url="%SWFPATH%/img/select_btn/transparent-t.png"
-		depth="4000"
+		url="%SWFPATH%/img/select_btn/transparent.png"
+		depth="2000"
 		vr_timeout="0"
 		onover= "vr_btn_over()"
 		onout="vr_btn_out()"
@@ -35,8 +35,8 @@
 		height="132"
 		oy="160"
 		zorder="10"
-		url="%SWFPATH%/img/select_btn/transparent-t.png"
-		depth="4000"
+		url="%SWFPATH%/img/select_btn/transparent.png"
+		depth="2000"
 		vr_timeout="0"
 		onover= "vr_btn_over()"
 		onout="vr_btn_out()"
@@ -50,8 +50,8 @@
 		ox="160"
 		zorder="10"
 		vr_timeout="0"
-		url="%SWFPATH%/img/select_btn/transparent-r.png"
-		depth="4000"
+		url="%SWFPATH%/img/select_btn/transparent.png"
+		depth="2000"
 		onover= "vr_btn_over()"
 		onout="vr_btn_out()"
 	
@@ -65,8 +65,8 @@
 		height="132"
 		ox="-160"
 		zorder="10"
-		url="%SWFPATH%/img/select_btn/transparent-r.png"
-		depth="4000"
+		url="%SWFPATH%/img/select_btn/transparent.png"
+		depth="2000"
 		onover= "vr_btn_over()"
 		onout="vr_btn_out()"
 		/>
@@ -77,7 +77,7 @@
 		width="30"
 		keep="true"
 		height="30"
-		zorder="7"
+		zorder="10"
 		url="%SWFPATH%/img/select_btn/black.png"
 		handcursor="false"
 		onover= "vr_btn_over()"
@@ -93,15 +93,12 @@
 		var hs_add = krpano.get("hotspot[transparent_add]");
 		var hs_less = krpano.get("hotspot[transparent_less]");
 		var hs_hidden = krpano.get("hotspot[view_btn_hidden]");
-		
-		var h = krpano.view.hlookat;
-		var v = krpano.view.vlookat;
 
-		var f = 1;	// follow speed factor
-			var h = krpano.view.hlookat;
-			var v = krpano.view.vlookat;
-			var hsh = hs_yes.ath;
-			var hsv = hs_yes.atv;
+		var f = 1,	// follow speed factor
+			h = krpano.view.hlookat,
+			v = krpano.view.vlookat,
+			hsh = hs_yes.ath,
+			hsv = hs_yes.atv;
 			// map to -180 to +180
 			h   = (h  -(h|0))   + (((h|0)  +360180)%360) - 180.0;
 			hsh = (hsh-(hsh|0)) + (((hsh|0)+360180)%360) - 180.0;
@@ -140,7 +137,7 @@
 		<!--set(hotspot[select_btn].scale,0.7);-->
 		select_btn();
 		set(hotspot[select_btn].url,"img/select_btn/select_btn.png");
-		set(hotspot[select_btn].crop,"35|563|493|493");
+		set(hotspot[select_btn].crop,"15|553|494|494");
 		set(hotspot[transparent_add].enabled,false);
 		set(hotspot[transparent_less].enabled,false);
 		set(hotspot[transparent_yes].enabled,true);
@@ -154,7 +151,7 @@
 		<!--set(hotspot[select_btn].scale,0.7);-->
 		select_btn();
 		set(hotspot[select_btn].url,"img/select_btn/select_btn.png");
-		set(hotspot[select_btn].crop,"35|1201|493|493");
+		set(hotspot[select_btn].crop,"15|1201|494|494");
 		set(hotspot[transparent_add].handcursor,true);
 		set(hotspot[transparent_add].zorder,10);
 		set(hotspot[transparent_add].enabled,true);

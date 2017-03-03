@@ -9,15 +9,14 @@
 	
 	<action name="loop_all_hotspots">
 		sub(i,hotspot.count,1);
-		trace('i = ',i);
 		loop_all_hotspots_next(get(i));
 	</action>
 
 	<action name="loop_all_hotspots_next">
 		indexoftxt(index,get(hotspot[get(i)].name),'canvas');
 		if(index EQ 0,removehotspot(%1););
+		<!--trace(%0,' i = ',i);-->
 		dec(i);
-		trace('i = ',i);
 		if(i GE 0, loop_all_hotspots_next(get(i)) );
 	</action>
 	

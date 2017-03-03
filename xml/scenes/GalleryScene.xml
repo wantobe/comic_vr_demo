@@ -1,4 +1,4 @@
-<krpano>
+<krpano onstart="loadscene(gallery)">
 	<include url="%SWFPATH%/xml/common.xml" />
 	<include url="%SWFPATH%/xml/controllers/GalleryController.xml" />
 	
@@ -6,14 +6,12 @@
 	
 	<scene name="gallery" onstart="initScene();">
 		<view fovtype="VFOV" limitview="lookat" fov="90" fovmin="0" fovmax="360" />
-		<preview url="%SWFPATH%/img/bg/%$bgId%/preview.jpg" />
-		<image fov="10.0">
+		<image fov="10.0" if="hasBg==true">
 			<cube url="%SWFPATH%/img/bg/%$bgId%/mobile_%s.jpg" />
 		</image>
-		<hotspot  distorted="true" url="%SWFPATH%/img/index/logo.png"  oy="-550" scale="2" depth="2000" onover="tween(scale,2.3);" onout="tween(scale,2);" vr_timeout="500" onclick="webvr.enterVR();" zorder="2"/>
 		<hotspot  distorted="true" url="%SWFPATH%/img/home.png" ath="0" oy="680" scale="1" depth="2000" width="120" height="prop" onover="tween(scale,1.2);" onout="tween(scale,1);" vr_timeout="500"  zorder="5" onclick="go_home()"/>
 		
-		<hotspot  name="atuoBtn" distorted="true" url="%SWFPATH%/img/aut.png"  oy="550" ox="285" scale="1.4" depth="2000"  vr_timeout="500" zorder="2" onclick="select_btn_yse_no(toggle_play())"/>
+		<hotspot  name="atuoBtn" distorted="true" url="%SWFPATH%/img/aut.png"  oy="550" ox="385" scale="1.4" depth="2000"  vr_timeout="500" zorder="2" onclick="select_btn_yse_no(toggle_play())"/>
 	</scene>
 
 </krpano>

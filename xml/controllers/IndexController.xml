@@ -1,15 +1,5 @@
 <krpano>
 	
-	<action name="manage_hotspots">
-    for(set(i, 0), i LT hotspot.count, inc(i), 
-        indexoftxt(sindex, get(hotspot[get(i)].class), %1);
-        if(sindex GE 0, 
-        	if(%2=='switch', switch(hotspot[get(i)].visible));
-        	if(%2=='alpha_toggle', switch(hotspot[get(i)].alpha, 0.1, 1));
-        );
-    );
-	</action>
-	
 	<action name="go_theme">
 		if(hotspot[theme_bg].visible=='true',
 			loadscene('index',,KEEPVIEW,BLEND(0.5)),
@@ -78,29 +68,32 @@
 		copy(poster_,poster);
 		copy(data_,data);
 		copy(motion_,motion);
+		copy(episodes_,episodes);
 		select_btn_yse_no(
-			loadscene('poster_panel',poster=get:poster_&amp;data=get:data_&amp;motion=get:motion_,,BLEND(0.5));
+			loadscene('poster_panel',,,BLEND(0.5));
 		);
 	</action>
 	
 	<action name="set_poster">
-		set(hotspot[poster].url,get(poster));
+		set(hotspot[poster].url,get(poster_));
+		comic_scene_choose(get(motion_));
+		set(hotspot[play_icon].onclick, go_comic(get(comic.xmlpath),get(comic.scene)));
+	</action>
+	
+	<action name="comic_scene_choose">
 		def(comic,object);
-		if(motion == 'true',
+		if(%1 == 'true',
 			def(comic.xmlpath, string, '%SWFPATH%/xml/scenes/MotionComicScene.xml');
 			def(comic.scene, string, 'motionComic');
 			,
 			def(comic.xmlpath, string, '%SWFPATH%/xml/scenes/GalleryScene.xml');
 			def(comic.scene, string, 'gallery');
 		);
-		set(content_data,get(data));
-		set(hotspot[play_icon].onclick, go_comic(get(comic.xmlpath),get(comic.scene)));
 	</action>
 	
 	<action name="go_comic">
 		select_btn_yse_no(
 			loadpanoscene(%1,%2,page=0,REMOVESCENES,BLEND(0.5));
-			tween(hotspot[logo].alpha,0);
 		)
 	</action>
 	
@@ -147,7 +140,8 @@
 	
 	<action name="theme_change">
 		if(bgId != %1,
-			jscall("localStorage.setItem('bgId',%1)");
+			<!--jscall("localStorage.setItem('bgId',%1)"); 暂时注释，不保存背景id-->
+			set(hasBg,true);
 			loadscene('theme_panel',bgId=%1,KEEPVIEW,(BLEND(0.5)));
 		);
 	</action>
@@ -156,8 +150,10 @@
 		select_btn_yse_no(loadscene('index',,,BLEND(0.5)));
 	</action>
 	
-	<action name="index_list_init" type="javascript"><![CDATA[		
-			
+	<action name="index_list_init" type="javascript"><![CDATA[
+
+		krpano.call('help_panel_init()');
+
 		var styles = {
 		    common: {
 		        depth: 4000,
@@ -341,7 +337,16 @@
 						onover:"tween(scale,3)",
 						onout:"tween(scale,2.5)",
 						onclick:"select_btn_yse_no(go_theme());"
-					}
+					},
+					helpicon: {
+				    	url: "%SWFPATH%/img/help/help_icon.png",
+				    	scale:4,
+				    	width:40,
+						height:"prop",
+						ox:800,
+						oy:-1000,
+						onclick:"select_btn_yse_no(help_panel_init(true));"
+				    }
 		        }
 		    }
 		};
@@ -470,7 +475,7 @@
 				scale:1.6
 			},
 			play_icon:{
-				url:"%SWFPATH%/img/play.png" ,
+				url:"%SWFPATH%/img/index/play.png" ,
 				width:150,
 				height:"prop",
 				scale:1.5,
@@ -484,5 +489,64 @@
 
 	]]></action>
 		
+	<action name="help_panel_init" type="javascript"><![CDATA[
+		var isGuideShowed = localStorage.getItem("isGuideShowed"),//是否显示过帮助
+			help_click=args[1];
+		isGuideShowed = isGuideShowed=="true"?true:false;
+		krpano.set("help_checked",isGuideShowed);
+		
+		var styles = {
+		    common: {
+		        depth: 2000,
+		        zorder: 5,
+		        scale: 2,
+		        distorted: true,
+		        vr_timeout: 500
+		    },
+		    help_panel_bg: {
+		    	url: "%SWFPATH%/img/help/help_bg.png",
+		    	width:1000,
+				height:"prop"
+		    },
+		    help_button: {
+		    	url: "%SWFPATH%/img/help/help_button.png",
+		    	width:128,
+				height:56,
+				crop:"8|149|324|142",
+				onovercrop:"8|7|324|142",
+				ox:590,
+				oy:310,
+				onclick:"select_btn_yse_no(delete_hotspots(help_))"
+		    },
+		    help_checked: {
+		    	url: "%SWFPATH%/img/help/help_checked.png",
+		    	width:52,
+				height:52,
+				crop:isGuideShowed?"152|14|130|130":"16|14|130|130",
+				onovercrop:"152|14|130|130",
+				ox:-620,
+				oy:376,
+				onclick: "select_btn_yse_no(help_checked_click(get(help_checked)))"
+		    }
+		    
+		}
+		if(!isGuideShowed || help_click){
+			krpano.call("traverse_styles('"+JSON.stringify(styles)+"')");
+		}
+		
+		
+	]]></action>
+	
+	<action name="help_checked_click">
+		if(%1!='true',
+			js(localStorage.setItem("isGuideShowed",true));
+			set(hotspot[help_checked].crop,"152|14|130|130");
+			set(help_checked,true);
+			,
+			js(localStorage.setItem("isGuideShowed",false));
+			set(hotspot[help_checked].crop,"16|14|130|130");
+			set(help_checked,false);
+		);
+	</action>
 	
 </krpano>

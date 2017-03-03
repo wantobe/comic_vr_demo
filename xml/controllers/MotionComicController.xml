@@ -1,35 +1,49 @@
-<krpano>
+<krpano debugmode="true">
 	
 <!--
 	描述：初始化场景
 -->
 	<action name="initScene" type="Javascript" devices="html5"><![CDATA[
-		require(["json!"+krpano.get('content_data')+"?callbak=define"],
+		window.episode = 0;//当前漫画第几话
+		require(["json!"+resolve('data_')+"?callbak=define"],
 			function(data){
 				window.comic_data = [];
 				window.comic_data = data;
 				krpano.call("play_scene(get(page))");
-				krpano.call("page_handle(calc(page+1), "+data.length+")");
+				krpano.call("page_handler(calc(page+1), "+data.length+")");
 			}
 		);
 		
 	]]></action>
 	
-	<action name="play_next">
+	<action name="play_page">
 		clearAllTimeOut();
 		clear_hotspot_of_canvas();
 		jsget(count, "comic_data.length");
-		dec(count);
+		if(%2==update_num,page_handler(calc(%1+1),get(count)));
+		set(page,%1);
+		play_scene(%1);
+	</action>
+	
+	<action name="play_next">
+		jsget(count, "comic_data.length");
+		<!--dec(count);
 		if(page EQ count,set(page,0),inc(page););
-		loadscene(get(xml.scene), page=get:page,,BLEND(0.2));
+		play_page(get(page),update_num);
+		循环切换-->
+		inc(page);
+		if(page LT count, play_page(get(page),update_num), set(page,calc(count-1));page_handler(get(count),get(count)));
+		
 	</action>
 	<action name="play_prev">
-		clearAllTimeOut();
-		clear_hotspot_of_canvas();
-		jsget(count, "comic_data.length");
+		<!--jsget(count, "comic_data.length");
 		dec(count);
 		if(page EQ 0,set(page,get(count)),dec(page););
-		loadscene(get(xml.scene), page=get:page,,BLEND(0.2));
+		play_page(get(page),update_num);
+		循环切换-->
+		dec(page);
+		if(page GE 0, play_page(get(page),update_num), set(page,0));
+		
 	</action>
 	
 	<action name="go_home">
@@ -37,7 +51,6 @@
 			clearAllTimeOut();
 			<!--clear_hotspot_of_canvas();-->
 			loadpanoscene(%SWFPATH%/xml/scenes/IndexScene.xml,'index',null,null,BLEND(0.5));
-			tween(hotspot[logo].alpha,1);
 		);
 	</action>
 	

@@ -21,22 +21,21 @@
 		calc(vh,(end_h-h)/frame);
 		calc(time, %1/frame);
 		copy(curTime, time);
-		trace("-------------");
-		trace(get(time));
+		debug(%0,' time:',get(time));
 
 		<!--tween(hotspot.aplah,%2,%1);
 		tween(hotspot.depth,%4,%1);-->
 
 		setinterval(crop_move_stretch_s, time,
-		if(curTime GT %1,clearinterval(crop_move_stretch_s),
-		add(x, vx);
-		add(y, vy);
-		add(w, vw);
-		add(h, vh);
-		txtadd(hotspot[%5].crop,get(x),'|',get(y),'|',get(w),"|",get(h));
-		add(curTime, time);
-		trace(curTime););
-		
+			if(curTime GT %1,clearinterval(crop_move_stretch_s),
+				add(x, vx);
+				add(y, vy);
+				add(w, vw);
+				add(h, vh);
+				txtadd(hotspot[%5].crop,get(x),'|',get(y),'|',get(w),"|",get(h));
+				add(curTime, time);
+				debug(%0,'  curTime:',curTime);
+			);
 		);
 
 	</action>
@@ -69,8 +68,8 @@
 			if(temp LT repeat_times,
 				inc(frame);
 				inc(temp);
-				trace("frame:",frame);
-				trace("temp:",temp);
+				debug(%0," frame:",frame);
+				debug(%0," temp:",temp);
 				if(frame GE frames, 
 					if(onlastframe !== null, onlastframe()); 
 					set(frame,0); 
@@ -154,7 +153,7 @@
 		if(%5!=null, 
 			set(old_rotate,get(hotspot[%5].rotate));
 		);
-		trace(get(old_rotate));
+		debug(%0,' old_rotate:',get(old_rotate));
 		set(temp, 0);
 		set(repeat_times,%4);
 		set(time,calc(%2/(1000*repeat_times)));
@@ -182,7 +181,7 @@
 		if(%5!=null, 
 			set(old_scale,get(hotspot[%5].scale));
 		);
-		trace(get(old_scale));
+		debug(%0,'  old_scale:',get(old_scale));
 		set(temp, 0);
 		set(repeat_times,%4);
 		set(time,calc(%2/(1000*repeat_times)));
@@ -209,7 +208,7 @@
 		if(%5!=null, 
 			set(old_depth,get(hotspot[%5].depth));
 		);
-		trace(get(old_depth));
+		debug(%0,' old_depth:',get(old_depth));
 		set(temp, 0);
 		set(repeat_times,%4);
 		set(time,calc(%2/(1000*repeat_times)));
@@ -236,7 +235,7 @@
 		if(%5!=null, 
 			set(old_zorder,get(hotspot[%5].zorder));
 		);
-		trace(get(zorder));
+		debug(%0,'  zorder:',get(zorder));
 		set(temp, 0);
 		set(repeat_times,%4);
 		set(time,calc(%2/(1000*repeat_times)));

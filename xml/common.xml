@@ -2,5 +2,26 @@
 	<include url="%SWFPATH%/plugins/webvr.xml" />
 	<include url="%SWFPATH%/xml/widget/Cursor.xml" />
 	<include url="%SWFPATH%/xml/widget/Text.xml" />
-	<include url="%SWFPATH%/xml/widget/PageHandle.xml" />
+	<include url="%SWFPATH%/xml/widget/PageHandler.xml" />
+	
+	<action name="switch_hotspots_visible">
+	    for(set(i, 0), i LT hotspot.count, inc(i), 
+	        indexoftxt(sindex, get(hotspot[get(i)].name), %1);
+	        if(sindex GE 0, switch(hotspot[get(i)].visible));
+	    );
+	</action>
+	
+	<action name="delete_hotspots" type="javascript"><![CDATA[	
+		var hs = [];
+		for(var i = 0; i<resolve("hotspot.count"); i++){
+			var name = resolve("hotspot["+i+"].name");
+			if(name.lastIndexOf(args[1])>=0){
+				hs.push(name);
+			}
+		}
+		for(var i in hs){
+			krpano.call("removehotspot("+hs[i]+")");
+		}
+	]]></action>
+	
 </krpano>

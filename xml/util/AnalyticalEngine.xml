@@ -6,22 +6,49 @@
 	-->
 	<action name="play_scene" type="Javascript" devices="html5">
 		<![CDATA[
-			window.engine_obj = {};
-			var animPos = 0;
-			var sceneIndx = args[1];
-			window.engine_obj.timeouts = [];
-			var t = null;
-			var obj =   eval("("+args[1]+")");
-			var list = comic_data[sceneIndx];
-			if(list==null){
-				console.log("数据为空");
-			}else{
+		window.engine_obj = {};
+		var animPos = 0;
+		var sceneIndx = args[1];
+		window.engine_obj.timeouts = [];
+		var t = null;
+		var obj = JSON.parse(args[1]);
+		var list = window.comic_data[sceneIndx];
+		
+		//对象浅拷贝
+		function clone(obj){
+		    var result={};
+		    for(key in obj){
+		        result[key]=obj[key];
+		    }
+		    return result;
+		}
+		
+		//为hotspot的name添加前缀
+		function add_prefix(name, pre){
+			var names_arr = name.split('|');
+			for(var i in names_arr){
+				var value = names_arr[i],
+					reg = new RegExp("/^"+pre+"/");
+				if(!reg.test(value)){
+					names_arr.splice(i,1,pre+value);
+				}
+			}
+			return names_arr.join("|");
+		}
+			
+		if(list==null){
+			console.log("数据为空");
+		}else{
 			for(var i=0; i<list.length; i++){
-			var obj = list[i];
+				var obj = list[i];
+				if(obj.name){
+					obj.name = add_prefix(obj.name, 'canvas_');
+				}
+				
 				if(obj.type=='amin'){
 					if(obj.action=='hotspot_toggle_img'){
 						t = setTimeout(function(){
-							var obj = list[animPos];
+							var obj = clone(list[animPos]);
 							var name = obj.name;
 							obj.name = name+"_1";
 							krpano.call("createHotspot('"+JSON.stringify(obj)+"')");
@@ -56,7 +83,7 @@
 						},obj.delay);
 					}else if(obj.action=="crop_move_stretch"){
 						t = setTimeout(function(){
-							var obj = list[animPos];
+							var obj = clone(list[animPos]);
 							animPos++;
 							if(obj.name!=null){
 								var names = obj.name.split("|");
@@ -80,7 +107,7 @@
 						},obj.delay);
 					}else if(obj.action=='buildHotspot_Img'){
 						t = setTimeout(function(){
-							var obj = list[animPos];
+							var obj = clone(list[animPos]);
 							
 							var name = obj.name;
 							if(name!=null){
@@ -105,19 +132,18 @@
 							krpano.call("showDialogYesAndNo("+obj.next+","+obj.page+")");
 						},obj.delay);
 					}else if(obj.action=='select_btn_left_right'){
-					
-						var t1 = setTimeout(function(){
+						/*var t1 = setTimeout(function(){
 							krpano.call("buildHotspot_mask()");
 						},obj.delay-500);
-						window.engine_obj.timeouts.push(t1);
+						window.engine_obj.timeouts.push(t1);*/
 						t = setTimeout(function(){
 							var obj = list[animPos];
 							animPos++;
-							krpano.call("initTurnPage("+obj.url+","+obj.nextPage+","+obj.lastPage+")");
+							krpano.call("initTurnPage()");
 						},obj.delay);
 					}else if(obj.action=='removehotspot'){
 						t = setTimeout(function(){
-							var obj = list[animPos];
+							var obj = clone(list[animPos]);
 							animPos++;
 							var name = obj.name;
 							if(name!=null){
@@ -135,7 +161,7 @@
 							animPos++;
 							console.info("---------");
 							console.info(obj);
-							//krpano.call("playsound(bgsnd, "+obj.url+", 1);");
+							krpano.call("playsound(bgsnd, "+obj.url+", 1);");
 					},obj.delay);
 				}else if(obj.type=="syn_amin"){
 					t = setTimeout(function(){
@@ -164,9 +190,13 @@
 						}
 					},obj.delay);
 				}
+				
 				window.engine_obj.timeouts.push(t);
 			};
-			}
+		}
+		
+		
+
 		]]>
 	</action >
 	
@@ -186,15 +216,16 @@
 	-->
 	
 	<action name="initTurnPage">
-		txtadd(next,"loadpano(",%1,",","page=",%2,",KEEPSCENES)");
-		txtadd(last,"loadpano(",%1,",","page=",%3,",KEEPSCENES)");
-		if(mask_is_onver EQ true,trace("true");select_btn_left_right(play_prev(),play_next()););
+		<!--if(mask_is_onver EQ true,trace(%0," mask_is_onver:true");select_btn_left_right(play_prev(),play_next()););-->
+		tween(hotspot[arrow_left].alpha|hotspot[arrow_right].alpha,1|1);
+		set(hotspot[arrow_left].enabled,true);
+		set(hotspot[arrow_right].enabled,true);
 	</action>
 	
 	
 	<action name="createHotspot"  type="Javascript" devices="html5">
 		<![CDATA[
-		var obj =   eval("("+args[1]+")"); ; 
+		var obj =   JSON.parse(args[1]);
 		var hotspotName = Date.parse(new Date()); 
 			if(obj.name!=null){
 				hotspotName = obj.name;
@@ -248,7 +279,7 @@
 	
 	<action name="depthAct"  type="Javascript" devices="html5">
 		<![CDATA[
-		var obj =   eval("("+args[1]+")");
+		var obj = JSON.parse(args[1]);
 		if(obj.name!=null){
 			var names = obj.name.split("|");
 			for(var i=0; i<names.length;i++){
@@ -261,7 +292,7 @@
 	
 	<action name="alphaAct"  type="Javascript" devices="html5">
 		<![CDATA[
-		var obj =   eval("("+args[1]+")");
+		var obj = JSON.parse(args[1]);
 		if(obj.name!=null){
 			var names = obj.name.split("|");
 			var desPos = obj.ox+"|"+obj.oy;
@@ -277,7 +308,7 @@
 	
 	<action name="scaleAct"  type="Javascript" devices="html5">
 		<![CDATA[
-		var obj =   eval("("+args[1]+")");
+		var obj = JSON.parse(args[1]);
 		if(obj.name!=null){
 			var names = obj.name.split("|");
 			var desPos = obj.ox+"|"+obj.oy;
@@ -291,7 +322,7 @@
 	
 	<action name="rotateAct"  type="Javascript" devices="html5">
 		<![CDATA[
-		var obj =   eval("("+args[1]+")");
+		var obj = JSON.parse(args[1]);
 		if(obj.name!=null){
 			var names = obj.name.split("|");
 			var desPos = obj.ox+"|"+obj.oy;
@@ -308,7 +339,7 @@
 	-->
 	<action name="movingAct"  type="Javascript" devices="html5">
 		<![CDATA[
-		var obj =   eval("("+args[1]+")");
+		var obj = JSON.parse(args[1]);
 		if(obj.name!=null){
 			var names = obj.name.split("|");
 			var desPos = obj.ox+"|"+obj.oy;
@@ -326,7 +357,7 @@
 	-->
 	<action name="zorderAct"  type="Javascript" devices="html5">
 		<![CDATA[
-		var obj =   eval("("+args[1]+")");
+		var obj = JSON.parse(args[1]);
 		if(obj.name!=null){
 			var names = obj.name.split("|");
 			for(var i=0; i<names.length;i++){

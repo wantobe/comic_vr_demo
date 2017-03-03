@@ -5,12 +5,14 @@
 		 *
 		 * @param {Object} args[1]	格式如下：
 		 	{
-				name:string,		hotspot的name
-				text:string,		显示的文字
-				width:number,		hotspot的宽
-				height:number,		hotspot的高
-				color:string,		文字颜色css格式
-				background:string	背景色
+				name:{string},		hotspot的name
+				text:{string},		显示的文字
+				width:{number},		hotspot的宽
+				height:{number},	hotspot的高
+				color:{string},		文字颜色css格式
+				background:{string},背景色
+				textAlign:{string}	水平对齐方式
+				
 			};
 		 */
 		
@@ -26,12 +28,19 @@
 			canvas.width = params.width;
 			canvas.height= params.height;
 			
-			if(textMetrics.width>canvas.width){
-				context.textAlign = 'left'; //设置文本的水平对对齐方式
+			//设置文本的水平对对齐方式
+			if(textMetrics.width>canvas.width || params.textAlign=='left'){
+				context.textAlign = 'left';
 				start_x = 0;
 			}else {
-				context.textAlign = 'center'; //设置文本的水平对对齐方式
-				start_x = canvas.width/2;
+				if(!params.textAlign || params.textAlign=='center'){
+					context.textAlign = 'center';
+					start_x = canvas.width/2;
+				}else if(params.textAlign=="right"){
+					context.textAlign = 'right';
+					start_x = canvas.width;
+				}
+				
 			}
 			
 			background = params.background?params.background:background;

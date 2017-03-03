@@ -1,14 +1,13 @@
 <krpano onstart="loadscene(index)">
 	<include url="%SWFPATH%/xml/common.xml" />
 	<include url="%SWFPATH%/xml/controllers/IndexController.xml" />
-	
+
 	<scene name="index" onstart="index_list_init();">
 		<view fovtype="VFOV" limitview="lookat" fov="90" fovmin="20" fovmax="160" />
-		<preview url="%SWFPATH%/img/bg/%$bgId%/preview.jpg" />
-		<image fov="10.0">
+		<image fov="10.0" if="hasBg==true">
 			<cube url="%SWFPATH%/img/bg/%$bgId%/mobile_%s.jpg" />
 		</image>
-		<hotspot name="logo" url="%SWFPATH%/img/index/logo.png" 
+		<hotspot name="logo" url="%SWFPATH%/img/logo.png" 
 			distorted="true"
 			keep="true"
 			scale="4.0"
@@ -23,14 +22,14 @@
 	
 	<scene name="theme_panel" onstart="theme_panel_init()">
 		<view fovtype="VFOV" limitview="lookat" fov="90" fovmin="20" fovmax="160" />
-		<image fov="10.0">
+		<image fov="10.0" if="hasBg==true">
 			<cube url="%SWFPATH%/img/bg/%$bgId%/mobile_%s.jpg" />
 		</image>
 	</scene>
 	
 	<scene name="poster_panel" onstart="poster_panel_init();">
 		<view fovtype="VFOV" limitview="lookat" fov="90" fovmin="20" fovmax="160" />
-		<image fov="10.0">
+		<image fov="10.0" if="hasBg==true">
 			<cube url="%SWFPATH%/img/bg/%$bgId%/mobile_%s.jpg" />
 		</image>
 	</scene>

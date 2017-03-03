@@ -1,19 +1,39 @@
 <krpano>
 	
-	<skin_settings curIndex="0" count="0" baseurl="" isAutoStart="0" distance="40" hotspot_num="5" speed="4" direction="left"/>
+	<skin_settings curIndex="0" count="0" loop="false" isAutoStart="0" distance="40" hotspot_num="5" speed="4" direction="left"  model="single" />
 	
 	
 	<!--生成Gallery画廊
-	baseurl 图片基础路劲
 	count 总数
 	curIndex 当前位置
 	isAutoStart  是否自动播放-->
 	<action name="gallery" type="Javascript" devices="html5">>
 		<![CDATA[
+			var data = [];
+			var singlePageMode= {
+				distance: 40,
+				hotspot_num:5,
+				arrow_ath:20
+			};
+			var doublePageMode = {
+				distance: 70,
+				hotspot_num:5,
+				arrow_ath:37
+			}
 			
-			var distance = krpano.get("skin_settings.distance");
+			var selectModel = singlePageMode;
+			if(args[3]=='single'){
+				selectModel = singlePageMode;
+			}else if(args[3]=='double'){
+				selectModel = doublePageMode;
+			}
+			krpano.set("skin_settings.distance",selectModel.distance);
+			krpano.set("skin_settings.hotspot_num",selectModel.hotspot_num);
+			var distance = selectModel.distance;
 			
-			var data = [{
+			
+			
+			var data1 = [{
 			name:"gallery_5",
 			depth:3000,
 			width:640,
@@ -22,7 +42,6 @@
 			ath:distance*2,
 			zorder:5,
 			atv:0,
-			url:"%SWFPATH%/img/dtcys/001.jpg"
 			},{
 			name:"gallery_4",
 			depth:3000,
@@ -32,7 +51,6 @@
 			zorder:5,
 			ath:distance,
 			atv:0,
-			url:"%SWFPATH%/img/dtcys/001.jpg"
 			},{
 			name:"gallery_3",
 			depth:2000,
@@ -43,7 +61,6 @@
 			oy:0,
 			ath:0,
 			atv:0,
-			url:"%SWFPATH%/img/dtcys/001.jpg"
 			},{
 			name:"gallery_2",
 			depth:3000,
@@ -52,7 +69,6 @@
 			oy:0,
 			height:960,
 			ath:-distance,
-			url:"%SWFPATH%/img/dtcys/001.jpg",
 			atv:0
 			},{
 			name:"gallery_1",
@@ -65,6 +81,116 @@
 			url:"%SWFPATH%/img/dtcys/001.jpg",
 			atv:0
 			}];
+			/*模式二 data*/
+			var data2 = [{
+			name:"gallery_5_2",
+			depth:3000,
+			width:640,
+			height:960,
+			oy:0,
+			ath:distance*2,
+			zorder:5,
+			ox:320,
+			atv:0,
+			},{
+			name:"gallery_5_1",
+			depth:3000,
+			width:640,
+			height:960,
+			oy:0,
+			ath:distance*2,
+			zorder:5,
+			ox:-320,
+			atv:0,
+			},{
+			name:"gallery_4_2",
+			depth:3000,
+			width:640,
+			height:960,
+			oy:0,
+			ath:distance*1,
+			zorder:5,
+			ox:320,
+			atv:0,
+			},{
+			name:"gallery_4_1",
+			depth:3000,
+			width:640,
+			height:960,
+			oy:0,
+			ath:distance*1,
+			zorder:5,
+			ox:-320,
+			atv:0,
+			},{
+			name:"gallery_3_2",
+			depth:2000,
+			width:640,
+			height:960,
+			oy:0,
+			ath:0,
+			zorder:5,
+			ox:320,
+			atv:0,
+			},{
+			name:"gallery_3_1",
+			depth:2000,
+			width:640,
+			height:960,
+			oy:0,
+			ath:0,
+			zorder:5,
+			ox:-320,
+			atv:0,
+			},{
+			name:"gallery_2_2",
+			depth:3000,
+			oy:0,
+			height:960,
+			width:640,
+			ox:320,
+			zorder:5,
+			ath:-distance*1,
+			atv:0,
+			},{
+			name:"gallery_2_1",
+			depth:3000,
+			ox:-320,
+			height:960,
+			width:640,
+			zorder:5,
+			oy:0,
+			ath:-distance*1,
+			atv:0,
+			},{
+			name:"gallery_1_2",
+			depth:3000,
+			zorder:5,
+			width:640,
+			oy:0,
+			ox:320,
+			height:960,
+			ath:-distance*2,
+			atv:0
+			},{
+			name:"gallery_1_1",
+			depth:3000,
+			oy:0,
+			ox:-320,
+			width:640,
+			height:960,
+			zorder:5,
+			ath:-distance*2,
+			atv:0
+			}];
+			
+			if(args[3]=='single'){
+				data = data1;
+				krpano.set("skin_settings.model","single");
+			}else if(args[3]=='double'){
+				data = data2;
+				krpano.set("skin_settings.model","double");
+			}
 			var count = window.gallary_data.length;
 			var curIndex = args[1];
 			var isAutoStart = args[2]==null?0:args[2];
@@ -85,25 +211,23 @@
 				krpano.call("galleryCreateHotspot('"+JSON.stringify(data[i])+"')");
 			}
 			
-			for(var i=0;i<data.length;i++ ){
+
+			for(var i=0;i<selectModel.hotspot_num;i++ ){
 				var imgPos = i+1;
 				if(pos>=count){
 					pos = 0;
 				}
 				
-				//设置中间旁边左右两张可以点击切换页面
-				krpano.set("hotspot[gallery_"+imgPos+"].vr_timeout",500);
-				if(i==1){
-					krpano.set("hotspot[gallery_"+imgPos+"].onclick","select_btn_yse_no(gallery_last())");
-				}else if(i==3){
-					krpano.set("hotspot[gallery_"+imgPos+"].onclick","select_btn_yse_no(gallery_next())");
+				if(args[3]=='single'){
+					krpano.set("hotspot[gallery_"+imgPos+"].url",window.gallary_data[pos].img);
+				}else if(args[3]=='double'){
+					krpano.set("hotspot[gallery_"+imgPos+"_2].url",window.gallary_data[pos].img2);
+					krpano.set("hotspot[gallery_"+imgPos+"_1].url",window.gallary_data[pos].img);
 				}
 				
-				krpano.set("hotspot[gallery_"+imgPos+"].url",window.gallary_data[pos].img);
 				pos++;
 			}
 			
-			console.info(isAutoStart);
 			if(isAutoStart==1){
 				var speed =  krpano.get("skin_settings.speed");
 				krpano.call("setinterval(gallaryinterval,"+speed+",gallery_next())");
@@ -115,19 +239,33 @@
 		<![CDATA[
 			var hotspot_num =  krpano.get("skin_settings.hotspot_num");
 			var distance =  krpano.get("skin_settings.distance");
+			var model = krpano.get("skin_settings.model");
+			if(model=='double'){
+				 distance = 70;
+			}
 			var curIndex =  krpano.get("skin_settings.curIndex");
-			
+		
 			var direction =  krpano.get("skin_settings.direction")=='left'?1:-1;
 			var next = 1;
 			if(args[1]){
 				next = parseInt(args[1]);
 			}
 			var curIndex_temp = next == 1 ? ++curIndex : curIndex--; 
-
+			
+			if(resolve("skin_settings.loop")=="true" ||resolve("skin_settings.loop")=="false" && curIndex>=0 && curIndex<window.gallary_data.length){
+			
 			for(var i=0;i<hotspot_num;i++ ){
+			
 				var hotspotPos = i+1;
+				var hotsotPos2 = null;
+				if(model=='double'){
+					hotsotPos2 =hotspotPos+"_2";
+					hotspotPos +="_1";
+					
+				}
 				var ath = krpano.get("hotspot[gallery_"+hotspotPos+"].ath");
 				var dis = ath-distance*direction*next;
+				var isCount = false;
 				if(ath==-2*distance*direction*next){
 					if(curIndex_temp%window.gallary_data.length==0){
 						curIndex=(window.gallary_data.length-1)*(1-next)/2;
@@ -137,31 +275,46 @@
 					krpano.call("tween(hotspot[gallery_"+hotspotPos+"].ath,"+(-180*direction*next)+",0.5,,set(hotspot[gallery_"+hotspotPos+"].ath,"+180*direction*next+");tween(hotspot[gallery_"+hotspotPos+"].ath,"+2*distance*direction*next+",0.5))");
 					//krpano.call("tween(hotspot[gallery_"+hotspotPos+"].ath,"+2*distance*direction*next+",1)");
 					
+					if(model=='double'){
+						krpano.call("tween(hotspot[gallery_"+hotsotPos2+"].alpha,0,0.5,,tween(hotspot[gallery_"+hotsotPos2+"].alpha,1,0.5);)");
+						krpano.call("tween(hotspot[gallery_"+hotsotPos2+"].ath,"+(-180*direction*next)+",0.5,,set(hotspot[gallery_"+hotsotPos2+"].ath,"+180*direction*next+");tween(hotspot[gallery_"+hotsotPos2+"].ath,"+2*distance*direction*next+",0.5))");
+					}
 					var leftPos = curIndex+2*next;
 					if(leftPos>=window.gallary_data.length || leftPos<0){
 						leftPos = leftPos-window.gallary_data.length*next;
 					}
+					
+					
 					krpano.set("hotspot[gallery_"+hotspotPos+"].url",window.gallary_data[leftPos].img);
+					if(model=='double'){
+						krpano.set("hotspot[gallery_"+hotsotPos2+"].url",window.gallary_data[leftPos].img2);
+					}
 				}else{
-					//console.info(ath);
 					var callBack = null;
+					var callBack2 = null;
 					if(ath==0){
 						krpano.call("tween(hotspot[gallery_"+hotspotPos+"].depth,3000,0.3)");
-						krpano.set("hotspot[gallery_"+hotspotPos+"].onclick","select_btn_yse_no(gallery_next("+(-next)+"))");
+						if(model=='double'){
+							krpano.call("tween(hotspot[gallery_"+hotsotPos2+"].depth,3000,0.3)");
+						}	
 					}else if(ath==distance*direction*next){
 						//var speed = parseInt(krpano.get("skin_settings.speed"))-1;
-						callBack = "tween(hotspot[gallery_"+hotspotPos+"].depth,"+2000+","+1+",easeOutBounce)";
-						krpano.set("hotspot[gallery_"+hotspotPos+"].onclick","");
-					}else if(ath==-distance*direction*next){
-						krpano.set("hotspot[gallery_"+hotspotPos+"].onclick","");
-					}else if(ath==2*distance*direction*next){
-						krpano.set("hotspot[gallery_"+hotspotPos+"].onclick","select_btn_yse_no(gallery_next("+next+"))");
+						callBack = "tween(hotspot[gallery_"+hotspotPos+"].depth,"+2000+","+1+",easeOutBounce);";
+						if(model=='double'){
+							callBack2 = "tween(hotspot[gallery_"+hotsotPos2+"].depth,"+2000+","+1+",easeOutBounce);";
+						}
 					}
 					
 					krpano.call("tween(hotspot[gallery_"+hotspotPos+"].ath,"+dis+",1,,"+callBack+")");
+					
+					if(model=='double'){
+							krpano.call("tween(hotspot[gallery_"+hotsotPos2+"].ath,"+dis+",1,,"+callBack2+")");
+					}
 				}
 			}
-			krpano.call("page_handle(calc(skin_settings.curIndex+1),get(skin_settings.count))");
+			
+			}
+			krpano.call("page_handler(calc(skin_settings.curIndex+1),get(skin_settings.count))");
 		]]>
 	</action>
 	
@@ -231,6 +384,10 @@
 		
 		if(obj.rx!=null){
 			krpano.call("set(hotspot["+name+"].rx,"+obj.rx+")");
+		}
+		
+		if(obj.onclick!=null){
+			krpano.call("set(hotspot["+name+"].onclick,"+obj.onclick+")");
 		}
 		]]>
 	</action>
