@@ -1,0 +1,78 @@
+[
+	[
+		{
+			"type": "music",
+			"url": "%SWFPATH%/img/parenting_books/music/kim-1.mp3",
+			"delay": 0
+		}, {
+			"type": "amin",
+			"action": "hotspot_toggle_img",
+			"img": "%SWFPATH%/img/parenting_books/01/a.jpg|%SWFPATH%/img/parenting_books/01/b.jpg|%SWFPATH%/img/parenting_books/01/c.jpg|%SWFPATH%/img/parenting_books/01/d.jpg|%SWFPATH%/img/parenting_books/01/e.jpg",
+			"duration": 2000,
+			"repeat": 1,
+			"delay": 0
+		}, {
+			"type": "command",
+			"action": "select_btn_left_right",
+			"delay": 3000
+		}
+	],[
+		{
+			"type": "music",
+			"url": "%SWFPATH%/img/parenting_books/music/kim-2.mp3",
+			"delay": 0
+		}, {
+			"type": "command",
+			"action": "buildHotspot_Img",
+			"name": "y",
+			"img": "%SWFPATH%/img/parenting_books/02/y.jpg",
+			"delay": 0
+		}, {
+			"type": "amin",
+			"action": "hotspot_toggle_img",
+			"img": "%SWFPATH%/img/parenting_books/02/s3.png|%SWFPATH%/img/parenting_books/02/s2.png|%SWFPATH%/img/parenting_books/02/s.png",
+			"name":"s",
+			"duration": 2000,
+			"repeat": 4,
+			"delay": 0
+		}, {
+			"type": "command",
+			"action": "select_btn_left_right",
+			"delay": 3000
+		}
+	],[
+		{
+			"type": "music",
+			"url": "%SWFPATH%/img/parenting_books/music/kim-3.mp3",
+			"delay": 0
+		}, {
+			"type": "amin",
+			"action": "hotspot_toggle_img",
+			"img": "%SWFPATH%/img/parenting_books/03/a.jpg|%SWFPATH%/img/parenting_books/03/b.jpg",
+			"duration": 2000,
+			"repeat": 5,
+			"delay": 0
+		}, {
+			"type": "command",
+			"action": "select_btn_left_right",
+			"delay": 3000
+		}
+	],[
+		{
+			"type": "music",
+			"url": "%SWFPATH%/img/parenting_books/music/kim-4.mp3",
+			"delay": 0
+		}, {
+			"type": "amin",
+			"action": "hotspot_toggle_img",
+			"img": "%SWFPATH%/img/parenting_books/04/a.jpg|%SWFPATH%/img/parenting_books/04/c.jpg|%SWFPATH%/img/parenting_books/04/yt.jpg",
+			"duration": 2000,
+			"repeat": 5,
+			"delay": 0
+		}, {
+			"type": "command",
+			"action": "select_btn_left_right",
+			"delay": 3000
+		}
+	]
+]

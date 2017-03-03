@@ -1,0 +1,409 @@
+<krpano>
+	<settings currentpage="1" pages="1" width="640" degree="17.2" />
+	<action name="page_handler" type="javascript">
+	<![CDATA[
+		var arrowcoor = 1, //箭头的坐标
+			arrowzorder = 1, //箭头的层级
+			arrowalpha = 1, //箭头的透明度
+			lastPageNum = 0, //上一页的页码
+			arrowEnabled = true,
+			bar_width = resolve("settings.width"),
+			last_width = 0,
+			current_width = 0,
+			
+			//页码文本以及样式
+			pageText = {
+				name:'bar_page_text',
+				text:args[1]+"/"+args[2],
+				width:300,
+				height:100,
+				color:"#00ffff",
+				textAlign:"right"
+			},
+			
+			//进度条上的点击效果
+			barClick = "set(hotspot[bar_progress].alpha,1);"+
+				"set(hotspot[bar_point].crop,'0|0|172|306');"+
+				"set(hotspot[bar_cover].enabled,true);",
+			
+			//跳转到制定页码
+			goPage = "set(hotspot[bar_progress].alpha,0.75);"+
+				"set(hotspot[bar_cover].enabled,false);"+
+				"set(hotspot[bar_point].crop,'172|0|172|306');"+
+				"play_page(calc(settings.currentpage-1));",
+				
+			//左右箭头的点击效果
+			arrowClick = ";tween(hotspot[arrow_left].alpha|hotspot[arrow_right].alpha,0|0); set(enabled,false);"+
+				"if(xml.scene=='gallery',"+
+					"delayedcall(2.5,tween(hotspot[arrow_left].alpha|hotspot[arrow_right].alpha,1|1);set(enabled,true))"+
+				")";
+			
+		//判断漫画的类型（静/动态）
+		if(resolve("xml.scene") == 'gallery'){
+			if(window.gallary_mode == 'single'){
+				arrowcoor = 400;
+			}else if(window.gallary_mode == 'double'){
+				arrowcoor = 720;
+			}
+			arrowalpha = 1;
+			arrowzorder = 1;
+			arrowEnabled = true;
+		}else if(resolve("xml.scene") == 'motionComic'){
+			arrowtype = -1;
+			arrowcoor = 720;
+			arrowalpha = 0;
+			arrowzorder = 6;
+			arrowEnabled = false;
+		}
+
+		var pageObj = [
+			{
+				name: pageText.name,
+				ox: 0,
+				url: "",
+				scale: 0.75,
+				edge:"right",
+				ox: -350,
+				oy: 550,
+				alpha:1
+			},{
+				name: 'bar_bg',
+				url: "%SWFPATH%/img/page_handler/bar_bg.png",
+				scale: 1,
+				width:resolve("settings.width")*1.12,
+				height:"prop",
+				oy: 550,
+				alpha:0.75,
+				onclick:barClick
+			},{
+				name: 'bar_progress',
+				ox: -resolve("settings.width")*0.5,
+				url: "%SWFPATH%/img/page_handler/bar_progress.png",
+				scale: 1,
+				oy:550,
+				height:60,
+				width: 1,
+				edge: 'left',
+				alpha:0.75,
+				onclick:barClick
+			},{
+				name: 'bar_point',
+				url: "%SWFPATH%/img/page_handler/bar_point.png",
+				scale: 1,
+				width: 50,
+				height: 108,
+				oy: 548,
+				alpha:1,
+				crop:"172|0|172|306",
+				onclick:barClick
+			},{
+				name: 'bar_cover',
+				url: "%SWFPATH%/img/page_handler/bar_cover.png",
+				scale: 1,
+				width:krpano.get("settings.width"),
+				height:100,
+				zorder:20,
+				oy: 550,
+				alpha:0,
+				enabled:false,
+				onout:goPage
+			},{
+				name: 'arrow_right',
+				ox: arrowcoor,
+				oy:0,
+				url: "%SWFPATH%/img/page_handler/page_arrow.png",
+				alpha: arrowalpha,
+				enabled: arrowEnabled,
+				scale: 1,
+				width: 100,
+				height: 250,
+				zorder: arrowzorder,
+				rotate: 0,
+				onclick: "play_next()"+arrowClick,
+				vr_timeout: 300,
+				crop: "287|0|287|746",
+				onovercrop: "0|0|287|746"
+			},{
+				name: 'arrow_left',
+				ox: arrowcoor,
+				oy:0,
+				url: "%SWFPATH%/img/page_handler/page_arrow.png",
+				alpha: arrowalpha,
+				enabled: arrowEnabled,
+				scale: 1,
+				width: 100,
+				height: 250,
+				zorder: arrowzorder,
+				rotate: 180,
+				onclick: "play_prev()"+arrowClick,
+				vr_timeout: 300,
+				crop: "287|0|287|746",
+				onovercrop: "0|0|287|746"
+			}
+		];
+		
+		var nextEpisodeObj = [
+			{
+				name: 'episode_bg',
+				url: "%SWFPATH%/img/page_handler/next_episode_bg.png",
+				scale: 1.6,
+				width:840,
+				height:600,
+				zorder:6
+			},{
+				name: 'episode_text',
+				oy: -240,
+				zorder:6
+			},{
+				name: 'episode_close',
+				url:"%SWFPATH%/img/page_handler/episode_close.png",
+				ox: 600,
+				oy: -400,
+				width:120,
+				height:120,
+				crop:"0|0|100|102",
+				onovercrop:"0|102|100|102",
+				onclick:"delete_episode()",
+				vr_timeout:100,
+				zorder:6
+			},{
+				name:"episode_recomend_0",
+				url:"%SWFPATH%/img/static_comic/chaoxiyou/001.jpg",
+				ox:-400,
+				oy:230,
+				width:152,
+				height:202,
+				scale:1.62,
+				zorder:6
+			},{
+				name:"episode_recomend_1",
+				url:"%SWFPATH%/img/static_comic/chaoxiyou/001.jpg",
+				ox:-113,
+				oy:230,
+				width:152,
+				height:202,
+				scale:1.62,
+				zorder:6
+			},{
+				name:"episode_recomend_2",
+				url:"%SWFPATH%/img/static_comic/chaoxiyou/001.jpg",
+				ox:173,
+				oy:230,
+				width:152,
+				height:202,
+				scale:1.62,
+				zorder:6
+			},{
+				name:"episode_recomend_3",
+				url:"%SWFPATH%/img/static_comic/chaoxiyou/001.jpg",
+				ox:465,
+				oy:230,
+				width:152,
+				height:202,
+				scale:1.62,
+				zorder:6
+			},{
+				name:"episode_btn",
+				url:"%SWFPATH%/img/page_handler/episode_next.png",
+				width:230,
+				height:90,
+				ox:500,
+				oy:-50,
+				crop:"0|0|230|90",
+				onovercrop:"0|90|230|90",
+				onclick:"select_btn_yse_no(load_episode())",
+				zorder:6
+			}
+		];
+		
+		
+		for(var i in pageObj){
+			createHotspot(pageObj[i]);
+		}
+		
+		//显示页码文字
+		window.pageText = pageText;
+		krpano.call("text2image('"+JSON.stringify(pageText) +"')");
+		
+		//根据页码调整进度条
+		lastPageNum = resolve("settings.currentpage")*1;
+		last_width = lastPageNum/args[2]*bar_width;
+		current_width = args[1]/args[2]*bar_width;
+		krpano.set("hotspot[bar_progress].width", last_width);
+		krpano.set("hotspot[bar_point].ox", -bar_width/2+last_width);
+		actions.tween("hotspot[bar_progress].width", current_width,0.2);
+		actions.tween("hotspot[bar_point].ox", -bar_width/2+current_width,0.2);
+		
+		//记录当前的页码/总页数
+		krpano.set("settings.currentpage",args[1]);
+		krpano.set("settings.pages",args[2]);
+		
+		//显示下一章提示页面
+		if(lastPageNum==args[2] && args[1]==args[2]){
+			var current_episode = parseInt(window.episode),
+				episodes_length = resolve('episodes_');
+			if(current_episode < episodes_length-1){
+				showEpisodeTips(1);
+			}else{
+				showEpisodeTips(0);
+			}
+		}
+		
+		
+		
+		function createHotspot(obj){
+			var default_value = {
+				distorted:true,
+				enabled:true,
+				depth:2000,
+				zorder:5,
+				ox:0, oy:0,
+				url:"",
+				width:"", height:"",
+				edge:"center",
+				scale:1,
+				alpha:1,
+				visible:true,
+				rotate:0,
+				vr_timeout:500,
+				onclick:"",
+				onout:"",
+				crop:"",
+				onovercrop:""
+			};
+			
+			krpano.call("addhotspot("+obj.name+")");
+			for(var i in default_value){
+				krpano.set("hotspot["+obj.name+"]."+i, default_value[i]);
+			}
+			for(var i in obj){
+				if(i!='name'){
+					krpano.set("hotspot["+obj.name+"]."+i, obj[i]);
+				}
+			}
+		}
+		
+		function showEpisodeTips(mode){
+			var text = [
+				'已经是最后一章了',
+				'已经是最后一页了'
+			];
+			for(var i in nextEpisodeObj){
+				createHotspot(nextEpisodeObj[i]);
+			}
+			krpano.set("hotspot[episode_btn].visible", mode==0?false:true);
+			
+			require(["json!../data/recommend.json?callbak=define"],
+				function(list) {
+					for(var i in list){
+						var data = list[i].data,
+							episodes = list[i].episodes,
+							motion = list[i].motion,
+							thumb = list[i].thumb;
+						krpano.set("hotspot[episode_recomend_"+i+"].url", thumb);
+						krpano.set("hotspot[episode_recomend_"+i+"].motion", motion);
+						krpano.set("hotspot[episode_recomend_"+i+"].data", data);
+						krpano.set("hotspot[episode_recomend_"+i+"].episodes", episodes);
+						krpano.set("hotspot[episode_recomend_"+i+"].onclick", 
+							"set(data_,get(data)); set(episodes_,get(episodes));"+
+							"comic_scene_choose(get(motion));go_comic(get(comic.xmlpath),get(comic.scene))"
+						);
+					}
+				}
+			);
+
+			krpano.set("hotspot[arrow_left].visible",false);
+			krpano.set("hotspot[arrow_right].visible",false);
+			krpano.set("hotspot[atuoBtn].visible",false);
+			krpano.call('switch_hotspots_visible(bar_)');
+			
+			var params = {
+					name:'episode_text',
+					text:text[mode],
+					width:800,
+					height:100
+				};
+			krpano.call("text2image('"+JSON.stringify(params)+"');");
+
+		}
+		
+		
+	]]>
+	</action>
+	
+	
+	<action name="load_episode" type="javascript">
+		<![CDATA[
+			var current_episode = parseInt(window.episode),
+				current_data_url = resolve("data_");
+				
+			window.episode = current_episode+1; 
+			
+			//本地数据和网络数据
+			if(/.+\.json$/.test(current_data_url)){
+				current_data_url = current_data_url.split(".json").join("");
+				load_data(current_data_url+"_"+window.episode+".json");
+			}else{
+				current_data_url = current_data_url+"?episode="+window.episode;
+			}
+			
+			function load_data(url){
+				require(["json!"+url+"?callbak=define"],
+					function(page_data){
+						var length = page_data.length;
+						if(length>0){
+							if(resolve("xml.scene")=="gallery"){
+								window.gallary_data = page_data;
+								krpano.call("gallery(0,0,"+gallary_mode+")");
+							}else if(resolve("xml.scene")=="motionComic"){
+								window.comic_data = page_data;
+								krpano.call("play_scene(0)");
+							}
+							krpano.call("delete_episode(); page_handler(1,"+length+");");
+						}
+					}
+				);
+			}
+
+		]]>
+	</action>
+	
+	<action name="delete_episode">
+		delete_hotspots("episode_");
+		set(hotspot[arrow_left].visible,true);
+		set(hotspot[arrow_right].visible,true);
+		set(hotspot[arrow_left].enabled,true);
+		set(hotspot[arrow_right].enabled,true);
+		tween(hotspot[arrow_left].alpha|hotspot[arrow_right].alpha,1|1);
+		set(hotspot[atuoBtn].visible,true);
+		switch_hotspots_visible(bar_);
+	</action>
+	
+	<events name="bar_progress_event" keep="true" onviewchange="bar_following()" />
+	<action name="bar_following" type="Javascript" devices="html5"><![CDATA[
+		var degree = parseFloat(resolve("settings.degree")),
+			bar_cover = krpano.get("hotspot[bar_cover]"),
+			point = krpano.get("hotspot[bar_point]");
+
+		if(point && bar_cover.hovering){
+			var h = krpano.view.hlookat;
+		
+			if(h>=-degree && h<=degree){
+				var num = h+degree,
+					pages = resolve("settings.pages");
+				num = num/(degree*2);
+				num = Math.round(pages*num);
+				if(num && num!=resolve("settings.currentpage")){
+					krpano.set("settings.currentpage",num);
+					var width = resolve('settings.width');
+					actions.tween("hotspot[bar_progress].width",num/pages*width,0.2);
+					actions.tween("hotspot[bar_point].ox",-width/2+num/pages*width,0.2);
+					window.pageText.text = num+"/"+pages;
+					krpano.call("text2image('"+JSON.stringify(window.pageText)+"')");
+				}
+			}
+		}
+		
+	]]></action>
+	
+</krpano>

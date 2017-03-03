@@ -1,0 +1,27 @@
+[
+	{
+		"title": "超西游",
+		"motion": "false",
+		"thumb": "%SWFPATH%/img/static_comic/chaoxiyou/001.jpg",
+		"data": "../data/chaoxiyou.json",
+		"episodes": 1
+	}, {
+		"title": "育儿绘本",
+		"motion": "true",
+		"thumb": "%SWFPATH%/img/parenting_books/child.jpg",
+		"data": "../data/child.json",
+		"episodes": 1
+	}, {
+		"title": "科学战士(2话)",
+		"motion": "false",
+		"thumb": "%SWFPATH%/img/static_comic/kexuezhanshi/001.jpg",
+		"data": "../data/kexuezhanshi.json",
+		"episodes": 2
+	}, {
+		"title": "死亡名单",
+		"motion": "true",
+		"thumb": "%SWFPATH%/img/bodycount/new.jpg",
+		"data": "../data/bodycount_data.json",
+		"episodes": 1
+	}
+]
