@@ -71,7 +71,7 @@
         "oy": 0,
         "delay": 0
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_depth|hotspot_moving|hotspot_zorder|hotspot_alpha",
         "depth": "2000",
         "zorder": 3,
@@ -108,7 +108,7 @@
         "oy": 0,
         "delay": 1000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_toggle_img",
         "name": "hotspot_img_02",
         "img": "%SWFPATH%/img/bodycount/001/ar.png|%SWFPATH%/img/bodycount/001/ar2.png",
@@ -120,7 +120,7 @@
         "repeat": 5,
         "delay": 2000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_depth|hotspot_moving",
         "depth": "2000",
         "ox": 1280,
@@ -132,7 +132,7 @@
         "repeat": 1,
         "delay": 2000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_depth|hotspot_moving|hotspot_zorder",
         "depth": "1500",
         "ox": 1280,
@@ -153,7 +153,7 @@
         "name": "a|hotspot_img_02_1|hotspot_img_02_2",
         "delay": 6000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_depth|hotspot_moving|hotspot_zorder|hotspot_alpha",
         "depth": "1000",
         "ox": 100,
@@ -166,7 +166,7 @@
         "repeat": 1,
         "delay": 7000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_toggle_img",
         "name": "hotspot_phone",
         "img": "%SWFPATH%/img/bodycount/001/bs.png|%SWFPATH%/img/bodycount/001/b.png",
@@ -183,7 +183,7 @@
         "name": "bs2|hotspot_phone_1|hotspot_phone_2",
         "delay": 11000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_depth|hotspot_moving|hotspot_zorder",
         "depth": "1000",
         "ox": 180,
@@ -196,7 +196,7 @@
         "repeat": 1,
         "delay": 11000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_alpha",
         "alpha": 1,
         "balpha": 0.4,
@@ -205,7 +205,7 @@
         "repeat": 1,
         "delay": 11000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_toggle_img",
         "name": "hotspot_person",
         "img": "%SWFPATH%/img/bodycount/001/c2.png|%SWFPATH%/img/bodycount/001/c.png",
@@ -226,7 +226,7 @@
         "oy": -500,
         "delay": 13000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_zorder",
         "ox": 400,
         "depth": 1500,
@@ -243,7 +243,7 @@
         "name": "chu|c|hotspot_person_1|hotspot_person_2",
         "delay": 15000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_depth|hotspot_zorder|hotspot_alpha",
         "ox": 0,
         "depth": 1800,
@@ -256,7 +256,7 @@
         "repeat": 1,
         "delay": 16000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_toggle_img",
         "name": "imgs_big_person",
         "img": "%SWFPATH%/img/bodycount/001/d2.png|%SWFPATH%/img/bodycount/001/d3.png",
@@ -277,7 +277,7 @@
         "oy": -200,
         "delay": 17000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_zorder",
         "ox": -200,
         "depth": 1500,
@@ -294,7 +294,7 @@
         "name": "fx|imgs_big_person_1|imgs_big_person_2|d",
         "delay": 19000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_depth|hotspot_moving|hotspot_zorder|hotspot_alpha",
         "ox": -300,
         "depth": 800,
@@ -307,7 +307,7 @@
         "repeat": 1,
         "delay": 19000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_toggle_img",
         "name": "imgs_e",
         "img": "%SWFPATH%/img/bodycount/001/er.png|%SWFPATH%/img/bodycount/001/er2.png",
@@ -339,7 +339,7 @@
         "oy": 0,
         "delay": 20000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_zorder",
         "ox": 200,
         "depth": 800,
@@ -361,7 +361,7 @@
         "name": "ed|imgs_e_1|imgs_e_2",
         "delay": 22000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_depth|hotspot_moving|hotspot_zorder|hotspot_alpha",
         "ox": -160,
         "depth": 1000,
@@ -384,7 +384,7 @@
         "zorder": 6,
         "delay": 24000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "balpha": 0.4,
         "alpha": 1,
@@ -572,7 +572,7 @@
         "oy": 0,
         "delay": 0
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_alpha|hotspot_moving",
         "name": "a2|a|ast",
         "ox": 1000,
@@ -584,7 +584,7 @@
         "repeat": 1,
         "delay": 2000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "a2",
         "balpha": 1,
@@ -593,7 +593,7 @@
         "repeat": 1,
         "delay": 3000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_moving",
         "name": "ast",
         "ox": 1100,
@@ -602,7 +602,7 @@
         "repeat": 1,
         "delay": 3850
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "ast",
         "balpha": 1,
@@ -611,7 +611,7 @@
         "repeat": 1,
         "delay": 3850
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "a2|a",
         "alpha": 0,
@@ -620,7 +620,7 @@
         "repeat": 1,
         "delay": 6000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "bz",
         "scale": 2,
@@ -632,7 +632,7 @@
         "repeat": 1,
         "delay": 7000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_toggle_img",
         "name": "img_bz",
         "img": "%SWFPATH%/img/bodycount/002/bz.png|%SWFPATH%/img/bodycount/002/bd.png|%SWFPATH%/img/bodycount/002/bj.png|%SWFPATH%/img/bodycount/002/bpz.png|%SWFPATH%/img/bodycount/002/bf.png",
@@ -643,7 +643,7 @@
         "repeat": 1,
         "delay": 8000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "bz",
         "alpha": 0,
@@ -661,7 +661,7 @@
         "alpha": 0,
         "delay": 8000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "bk",
         "scale": 2,
@@ -673,7 +673,7 @@
         "repeat": 1,
         "delay": 9000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "img_bz_1|img_bz_2|bk",
         "alpha": 0,
@@ -682,7 +682,7 @@
         "duration": 1000,
         "delay": 12000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_alpha|hotspot_scale",
         "name": "cd",
         "scale": 2,
@@ -694,7 +694,7 @@
         "repeat": 1,
         "delay": 13000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_alpha|hotspot_scale",
         "name": "cgz",
         "alpha": 1,
@@ -706,7 +706,7 @@
         "repeat": 1,
         "delay": 13100
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_rotate",
         "name": "cgz",
         "rotate": 20,
@@ -714,7 +714,7 @@
         "repeat": 1,
         "delay": 13100
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "cd|cgz",
         "alpha": 0,
@@ -723,7 +723,7 @@
         "repeat": 1,
         "delay": 16000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_alpha|hotspot_scale",
         "name": "d3",
         "ox": 900,
@@ -735,7 +735,7 @@
         "repeat": 1,
         "delay": 17000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_toggle_img",
         "name": "img_d",
         "img": "%SWFPATH%/img/bodycount/002/d.png|%SWFPATH%/img/bodycount/002/d2.png|%SWFPATH%/img/bodycount/002/d3.png",
@@ -746,7 +746,7 @@
         "repeat": 10,
         "delay": 18000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "img_d_1|img_d_2|d3",
         "alpha": 0,
@@ -755,7 +755,7 @@
         "repeat": 1,
         "delay": 23000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_alpha|hotspot_scale",
         "name": "e",
         "ox": 350,
@@ -767,7 +767,7 @@
         "repeat": 1,
         "delay": 24000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_alpha|hotspot_scale",
         "name": "ek",
         "alpha": 1,
@@ -779,7 +779,7 @@
         "repeat": 1,
         "delay": 24100
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "ek|e",
         "alpha": 0,
@@ -788,7 +788,7 @@
         "repeat": 1,
         "delay": 26000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_alpha|hotspot_scale",
         "name": "fz",
         "ox": -400,
@@ -800,7 +800,7 @@
         "repeat": 1,
         "delay": 27000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_toggle_img",
         "name": "img_f",
         "img": "%SWFPATH%/img/bodycount/002/fz.png|%SWFPATH%/img/bodycount/002/f.png",
@@ -811,7 +811,7 @@
         "repeat": 15,
         "delay": 28000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "fz|img_f_1|img_f_2",
         "alpha": 0,
@@ -820,7 +820,7 @@
         "repeat": 1,
         "delay": 35000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_alpha|hotspot_scale",
         "name": "g",
         "ox": -1000,
@@ -832,7 +832,7 @@
         "repeat": 1,
         "delay": 36000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_alpha|hotspot_scale",
         "name": "gk",
         "ox": -1000,
@@ -844,7 +844,7 @@
         "repeat": 1,
         "delay": 36100
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "g|gk",
         "alpha": 0,
@@ -853,7 +853,7 @@
         "repeat": 1,
         "delay": 41000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_alpha|hotspot_scale",
         "name": "hr|hd|hdb|hst3",
         "ox": -650,
@@ -865,7 +865,7 @@
         "repeat": 1,
         "delay": 42000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_toggle_img",
         "name": "img_hst",
         "img": "%SWFPATH%/img/bodycount/002/hst.png|%SWFPATH%/img/bodycount/002/hst2.png|%SWFPATH%/img/bodycount/002/hst3.png",
@@ -885,7 +885,7 @@
         "oy": -700,
         "delay": 43000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_moving",
         "name": "hyz",
         "ox": 800,
@@ -894,7 +894,7 @@
         "duration": 1000,
         "delay": 43000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_scale",
         "name": "hr",
         "scale": 1,
@@ -902,7 +902,7 @@
         "repeat": 1,
         "delay": 44000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "hyz",
         "alpha": 0,
@@ -911,7 +911,7 @@
         "duration": 500,
         "delay": 44000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_moving",
         "name": "hr",
         "ox": -150,
@@ -938,7 +938,7 @@
         "oy": -400,
         "delay": 45000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "hd|hst3|hk|hk2|hr|hdb|img_hst_1|img_hst_2",
         "alpha": 0,
@@ -947,7 +947,7 @@
         "duration": 1000,
         "delay": 47000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "bg",
         "alpha": 1,
@@ -1055,7 +1055,7 @@
         "oy": 0,
         "delay": 4000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_depth|hotspot_moving|hotspot_zorder|hotspot_alpha",
         "depth": "2000",
         "ox": 600,
@@ -1068,7 +1068,7 @@
         "repeat": 1,
         "delay": 4000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_toggle_img",
         "name": "p03_img01",
         "img": "%SWFPATH%/img/bodycount/003/a.png|%SWFPATH%/img/bodycount/003/aa.png",
@@ -1085,7 +1085,7 @@
         "name": "ad|p03_img01_1|p03_img01_2",
         "delay": 8500
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_depth|hotspot_moving|hotspot_zorder|hotspot_alpha",
         "depth": "2600",
         "ox": 950,
@@ -1108,7 +1108,7 @@
         "oy": -300,
         "delay": 11000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_alpha",
         "name": "bm",
         "alpha": 1,
@@ -1122,7 +1122,7 @@
         "name": "b|bm",
         "delay": 13000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_depth|hotspot_moving|hotspot_zorder|hotspot_alpha",
         "depth": "2600",
         "ox": 300,
@@ -1140,7 +1140,7 @@
         "name": "c",
         "delay": 15000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_depth|hotspot_moving|hotspot_zorder|hotspot_alpha",
         "depth": "2600",
         "ox": -300,
@@ -1164,7 +1164,7 @@
         "oy": 600,
         "delay": 16500
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_alpha",
         "name": "dxx",
         "alpha": 1,
@@ -1178,7 +1178,7 @@
         "name": "dxx|d",
         "delay": 18000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_depth|hotspot_moving|hotspot_zorder|hotspot_alpha",
         "depth": "2600",
         "ox": -900,
@@ -1202,7 +1202,7 @@
         "zorder": 4,
         "delay": 19000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_alpha",
         "name": "e2",
         "alpha": 1,
@@ -1216,7 +1216,7 @@
         "name": "e2|e",
         "delay": 22000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_depth|hotspot_moving|hotspot_zorder|hotspot_alpha",
         "depth": "2600",
         "ox": -600,
@@ -1234,7 +1234,7 @@
         "name": "f",
         "delay": 24000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_depth|hotspot_moving|hotspot_zorder|hotspot_alpha",
         "depth": "2600",
         "ox": -600,
@@ -1435,7 +1435,7 @@
         "oy": 0,
         "delay": 0
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "Gd",
         "scale": 2,
@@ -1447,7 +1447,7 @@
         "duration": 1000,
         "delay": 2000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_toggle_img",
         "name": "img_G",
         "img": "%SWFPATH%/img/bodycount/004/G.png|%SWFPATH%/img/bodycount/004/G1.png|%SWFPATH%/img/bodycount/004/G2.png|%SWFPATH%/img/bodycount/004/G3.png",
@@ -1458,7 +1458,7 @@
         "repeat": 1,
         "delay": 3000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "img_G_1|Gd",
         "alpha": 0,
@@ -1467,7 +1467,7 @@
         "duration": 10,
         "delay": 4000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "img_G_2",
         "scale": 1,
@@ -1479,7 +1479,7 @@
         "duration": 1000,
         "delay": 5000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "Gz",
         "scale": 2,
@@ -1491,7 +1491,7 @@
         "duration": 1000,
         "delay": 6000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_toggle_img",
         "name": "img_Gz",
         "img": "%SWFPATH%/img/bodycount/004/Gz.png|%SWFPATH%/img/bodycount/004/Gz2.png|%SWFPATH%/img/bodycount/004/Gz3.png",
@@ -1502,7 +1502,7 @@
         "repeat": 10,
         "delay": 7000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "img_Gz_1|Gz",
         "alpha": 0,
@@ -1511,7 +1511,7 @@
         "duration": 10,
         "delay": 12000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "img_Gz_2",
         "scale": 1,
@@ -1523,7 +1523,7 @@
         "duration": 1000,
         "delay": 12000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "F",
         "scale": 2,
@@ -1535,7 +1535,7 @@
         "duration": 1000,
         "delay": 13000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "F",
         "scale": 1,
@@ -1547,7 +1547,7 @@
         "duration": 1000,
         "delay": 16000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "Edt",
         "scale": 2,
@@ -1559,7 +1559,7 @@
         "duration": 1000,
         "delay": 17000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "Esj2",
         "scale": 2,
@@ -1571,7 +1571,7 @@
         "duration": 1000,
         "delay": 17000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "Esj",
         "scale": 2,
@@ -1583,7 +1583,7 @@
         "duration": 1000,
         "delay": 17000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "Esj2",
         "alpha": 0,
@@ -1592,7 +1592,7 @@
         "duration": 1000,
         "delay": 18000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_rotate",
         "name": "Esj",
         "rotate": -1,
@@ -1600,7 +1600,7 @@
         "duration": 2000,
         "delay": 19000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "Esj",
         "scale": 1,
@@ -1612,7 +1612,7 @@
         "duration": 1000,
         "delay": 21000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "Edt",
         "scale": 1,
@@ -1624,7 +1624,7 @@
         "duration": 1000,
         "delay": 21000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "Dd",
         "scale": 2,
@@ -1636,7 +1636,7 @@
         "duration": 1000,
         "delay": 22000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_toggle_img",
         "name": "img_Dd",
         "img": "%SWFPATH%/img/bodycount/004/Dd.png|%SWFPATH%/img/bodycount/004/DDD.png",
@@ -1656,7 +1656,7 @@
         "oy": 545,
         "delay": 23100
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_rotate",
         "name": "DSj",
         "rotate": 0.5,
@@ -1664,7 +1664,7 @@
         "duration": 1900,
         "delay": 23100
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "Dd|DSj|img_Dd_1|img_Dd_2",
         "scale": 1,
@@ -1676,7 +1676,7 @@
         "duration": 1000,
         "delay": 25000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "Cd",
         "scale": 2,
@@ -1688,7 +1688,7 @@
         "duration": 1000,
         "delay": 26000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "Cff|C",
         "scale": 2,
@@ -1700,7 +1700,7 @@
         "duration": 1000,
         "delay": 26000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "img_Cr_2|img_Cr_1|Cd",
         "balpha": 1,
@@ -1709,7 +1709,7 @@
         "duration": 200,
         "delay": 27000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_toggle_img",
         "name": "img_Cr",
         "img": "%SWFPATH%/img/bodycount/004/Cr3.png|%SWFPATH%/img/bodycount/004/Cr2.png%SWFPATH%/img/bodycount/004/Cr.png",
@@ -1720,7 +1720,7 @@
         "repeat": 1,
         "delay": 27500
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_alpha",
         "name": "Cff",
         "ox": -400,
@@ -1731,7 +1731,7 @@
         "duration": 500,
         "delay": 28000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "img_Cr_1|img_Cr_2",
         "balpha": 1,
@@ -1740,7 +1740,7 @@
         "duration": 500,
         "delay": 28500
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_alpha|hotspot_scale",
         "name": "Cj",
         "ox": -500,
@@ -1752,7 +1752,7 @@
         "duration": 50,
         "delay": 29000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_alpha|hotspot_scale",
         "name": "Cw",
         "ox": -510,
@@ -1764,7 +1764,7 @@
         "duration": 10,
         "delay": 29500
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "Cj",
         "alpha": 0,
@@ -1791,7 +1791,7 @@
         "scale": 2,
         "delay": 29600
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "Cw2",
         "balpha": 0,
@@ -1800,7 +1800,7 @@
         "duration": 400,
         "delay": 29600
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "Cw|Cw2",
         "balpha": 1,
@@ -1809,7 +1809,7 @@
         "duration": 10,
         "delay": 30000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_alpha|hotspot_scale",
         "name": "C",
         "ox": 0,
@@ -1821,7 +1821,7 @@
         "duration": 1000,
         "delay": 30010
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_scale|hotspot_moving|hotspot_alpha",
         "name": "By3|By2|By|B",
         "scale": 2,
@@ -1833,7 +1833,7 @@
         "duration": 1000,
         "delay": 31010
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "By3",
         "balpha": 1,
@@ -1842,7 +1842,7 @@
         "duration": 500,
         "delay": 32000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "By2",
         "balpha": 1,
@@ -1851,7 +1851,7 @@
         "duration": 500,
         "delay": 32500
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "By",
         "balpha": 1,
@@ -1860,7 +1860,7 @@
         "duration": 500,
         "delay": 33000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_alpha|hotspot_scale",
         "name": "B",
         "ox": 0,
@@ -1872,7 +1872,7 @@
         "duration": 1000,
         "delay": 35000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_alpha|hotspot_scale",
         "name": "A",
         "ox": -1100,
@@ -1884,7 +1884,7 @@
         "duration": 1000,
         "delay": 36000
     }, {
-        "type": "syn_amin",
+        "type": "syn_animation",
         "action": "hotspot_moving|hotspot_alpha|hotspot_scale",
         "name": "A",
         "ox": 0,
@@ -1896,7 +1896,7 @@
         "duration": 1000,
         "delay": 39000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "bg",
         "balpha": 0,
@@ -1905,7 +1905,7 @@
         "duration": 1000,
         "delay": 40000
     }, {
-        "type": "amin",
+        "type": "animation",
         "action": "hotspot_alpha",
         "name": "bai",
         "balpha": 0.4,

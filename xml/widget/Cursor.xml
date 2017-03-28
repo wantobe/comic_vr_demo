@@ -3,72 +3,77 @@
 	<hotspot name="select_btn"
 		visible="false"
 		distorted="true"
-		width="494"
+		width="360"
 		keep="true"
-		height="494"
+		height="360"
 		zorder="10"
 		url="%SWFPATH%/img/select_btn/select_btn.png"
 		depth="2000"
+		crop="10|553|494|494"
 		onover= "vr_btn_over()"
 		onout="vr_btn_out()"
 		/>
+		<!--onloaded="select_btn();"-->
 	<hotspot name="transparent_close"
 		visible="false"
 		distorted="true"
-		width="179"
-		height="132"
-		oy="-160"
+		width="150"
+		height="90"
+		oy="-100"
 		keep="true"
 		zorder="10"
-		url="%SWFPATH%/img/select_btn/transparent.png"
+		url="%SWFPATH%/img/select_btn/black.png"
 		depth="2000"
 		vr_timeout="0"
 		onover= "vr_btn_over()"
 		onout="vr_btn_out()"
 		onclick="vr_btn_out();"
+		alpha="0"
 		/>
 	<hotspot name="transparent_yes"
 		visible="false"
 		keep="true"
 		distorted="true"
-		width="179"
-		height="132"
-		oy="160"
+		width="150"
+		height="90"
+		oy="100"
 		zorder="10"
-		url="%SWFPATH%/img/select_btn/transparent.png"
+		url="%SWFPATH%/img/select_btn/black.png"
 		depth="2000"
 		vr_timeout="0"
 		onover= "vr_btn_over()"
 		onout="vr_btn_out()"
+		alpha="0"
 		/>
 	<hotspot name="transparent_add"
 		visible="false"
 		distorted="true"
-		width="179"
+		width="90"
 		keep="true"
-		height="132"
-		ox="160"
+		height="150"
+		ox="100"
 		zorder="10"
 		vr_timeout="0"
-		url="%SWFPATH%/img/select_btn/transparent.png"
+		url="%SWFPATH%/img/select_btn/black.png"
 		depth="2000"
 		onover= "vr_btn_over()"
 		onout="vr_btn_out()"
-	
+		alpha="0"
 		/>
 	<hotspot name="transparent_less"
 		visible="false"
 		distorted="true"
 		keep="true"
-		width="179"
+		width="90"
 		vr_timeout="0"
-		height="132"
-		ox="-160"
+		height="150"
+		ox="-100"
 		zorder="10"
-		url="%SWFPATH%/img/select_btn/transparent.png"
+		url="%SWFPATH%/img/select_btn/black.png"
 		depth="2000"
 		onover= "vr_btn_over()"
 		onout="vr_btn_out()"
+		alpha="0"
 		/>
 	<hotspot name="view_btn_hidden"
 		visible="false"
@@ -137,7 +142,7 @@
 		<!--set(hotspot[select_btn].scale,0.7);-->
 		select_btn();
 		set(hotspot[select_btn].url,"img/select_btn/select_btn.png");
-		set(hotspot[select_btn].crop,"15|553|494|494");
+		set(hotspot[select_btn].crop,"10|553|494|494");
 		set(hotspot[transparent_add].enabled,false);
 		set(hotspot[transparent_less].enabled,false);
 		set(hotspot[transparent_yes].enabled,true);
@@ -151,7 +156,7 @@
 		<!--set(hotspot[select_btn].scale,0.7);-->
 		select_btn();
 		set(hotspot[select_btn].url,"img/select_btn/select_btn.png");
-		set(hotspot[select_btn].crop,"15|1201|494|494");
+		set(hotspot[select_btn].crop,"10|1201|494|494");
 		set(hotspot[transparent_add].handcursor,true);
 		set(hotspot[transparent_add].zorder,10);
 		set(hotspot[transparent_add].enabled,true);

@@ -1,68 +1,112 @@
 {
 	"new": [{
+		"id": "001",
 		"title": "死亡名单",
 		"motion": "true",
 		"thumb": "%SWFPATH%/img/bodycount/new.jpg",
 		"poster": "%SWFPATH%/img/bodycount/poster.jpg",
 		"data": "../data/bodycount_data.json",
-		"episodes": 1
-	}],
-	"recommend": [{
-		"title": "铂金终局",
-		"motion": "false",
-		"thumb": "%SWFPATH%/img/static_comic/bj/recommend.jpg",
-		"poster": "%SWFPATH%/img/static_comic/bj/poster.jpg",
-		"data": "../data/bj.json",
-		"episodes": 1
+		"episodes": 1,
+		"update_date": "2017-03-01",
+		"author": "si死亡名单ngdan",
+		"category": "冒险 玄幻",
+		"brief": "死亡名单发现自己被困死牢灯塔，钉墙不断逼近，而一墙之隔还关着女医学生苏瑾……奋力逃生并如约救出苏瑾后，坠海、失忆、面对敌人..."
 	}, {
-		"title": "独闯天涯",
-		"motion": "false",
-		"thumb": "%SWFPATH%/img/static_comic/duchuangtianya/recommend.jpg",
-		"poster": "%SWFPATH%/img/static_comic/duchuangtianya/poster.jpg",
-		"data": "../data/duchuangtianya.json",
-		"episodes": 1
-	}, {
-		"title": "科学战士(2话)",
-		"motion": "false",
-		"thumb": "%SWFPATH%/img/static_comic/kexuezhanshi/recommend.jpg",
-		"poster": "%SWFPATH%/img/static_comic/kexuezhanshi/poster.jpg",
-		"data": "../data/kexuezhanshi.json",
-		"episodes": 2
-	}, {
-		"title": "大唐除妖司",
-		"motion": "false",
-		"thumb": "%SWFPATH%/img/static_comic/dtcys/recommend.jpg",
-		"poster": "%SWFPATH%/img/static_comic/dtcys/poster.jpg",
-		"data": "../data/dtcys.json",
-		"episodes": 1
-	}],
-	"hot": [{
+		"id": "006",
 		"title": "迷域行者",
 		"motion": "true",
 		"thumb": "%SWFPATH%/img/puzzle_domain_walker/hot.jpg",
 		"poster": "%SWFPATH%/img/puzzle_domain_walker/poster.jpg",
 		"data": "../data/puzzle_domain_walker_data.json",
-		"episodes": 1
+		"episodes": 1,
+		"update_date": "2017-03-06",
+		"author": "66s迷域行者gdan",
+		"category": "66冒险 玄幻",
+		"brief": "66当宁远发现自己被困死牢灯塔，钉墙不断逼近，而一墙之隔还关着女医学生苏瑾……奋力逃生并如约救出苏瑾后，坠海、失忆、面对敌人..."
 	}, {
+		"id": "007",
 		"title": "双栖迷宫",
 		"motion": "false",
 		"thumb": "%SWFPATH%/img/static_comic/shuangqimigong/hot.jpg",
 		"poster": "%SWFPATH%/img/static_comic/shuangqimigong/poster.jpg",
 		"data": "../data/shuangqimigong.json",
-		"episodes": 1
+		"episodes": 1,
+		"update_date": "2017-03-07",
+		"author": "77s双栖迷宫an",
+		"category": "77冒险 玄幻",
+		"brief": "77当宁远发现自己被困死牢灯塔，钉墙不断逼近，而一墙之隔还关着女医学生苏瑾……奋力逃生并如约救出苏瑾后，坠海、失忆、面对敌人..."
 	}, {
+		"id": "008",
 		"title": "浪漫传说",
 		"motion": "false",
 		"thumb": "%SWFPATH%/img/static_comic/langmanchuanshuo/hot.jpg",
 		"poster": "%SWFPATH%/img/static_comic/langmanchuanshuo/poster.jpg",
 		"data": "../data/langmanchuanshuo.json",
-		"episodes": 1
+		"episodes": 1,
+		"update_date": "2017-03-08",
+		"author": "88s浪漫传说n",
+		"category": "88冒险 玄幻",
+		"brief": "88当宁远发现自己被困死牢灯塔，钉墙不断逼近，而一墙之隔还关着女医学生苏瑾……奋力逃生并如约救出苏瑾后，坠海、失忆、面对敌人..."
 	}, {
+		"id": "009",
 		"title": "Lily(3话)",
 		"motion": "false",
 		"thumb": "%SWFPATH%/img/static_comic/Lily/hot.jpg",
 		"poster": "%SWFPATH%/img/static_comic/Lily/poster.jpg",
 		"data": "../data/Lily.json",
-		"episodes": 3
+		"episodes": 3,
+		"update_date": "2017-03-09",
+		"author": "99Lily  mingdan",
+		"category": "99冒险 玄幻",
+		"brief": "99当宁远发现自己被困死牢灯塔，钉墙不断逼近，而一墙之隔还关着女医学生苏瑾……奋力逃生并如约救出苏瑾后，坠海、失忆、面对敌人..."
+	}],
+	"recommend": [{
+		"id": "002",
+		"title": "铂金终局",
+		"motion": "false",
+		"thumb": "%SWFPATH%/img/static_comic/bj/recommend.jpg",
+		"poster": "%SWFPATH%/img/static_comic/bj/poster.jpg",
+		"data": "../data/bj.json",
+		"episodes": 1,
+		"update_date": "2017-03-02",
+		"author": "2铂金终局mingdan",
+		"category": "22冒险 玄幻",
+		"brief": "22当宁远发现自己被困死牢灯塔，钉墙不断逼近，而一墙之隔还关着女医学生苏瑾……奋力逃生并如约救出苏瑾后，坠海、失忆、面对敌人..."
+	}, {
+		"id": "003",
+		"title": "独闯天涯",
+		"motion": "false",
+		"thumb": "%SWFPATH%/img/static_comic/duchuangtianya/recommend.jpg",
+		"poster": "%SWFPATH%/img/static_comic/duchuangtianya/poster.jpg",
+		"data": "../data/duchuangtianya.json",
+		"episodes": 1,
+		"update_date": "2017-03-03",
+		"author": "33siw独闯天涯an",
+		"category": "33冒险 玄幻",
+		"brief": "33当宁远发现自己被困死牢灯塔，钉墙不断逼近，而一墙之隔还关着女医学生苏瑾……奋力逃生并如约救出苏瑾后，坠海、失忆、面对敌人..."
+	}, {
+		"id": "004",
+		"title": "科学战士(2话)",
+		"motion": "false",
+		"thumb": "%SWFPATH%/img/static_comic/kexuezhanshi/recommend.jpg",
+		"poster": "%SWFPATH%/img/static_comic/kexuezhanshi/poster.jpg",
+		"data": "../data/kexuezhanshi.json",
+		"episodes": 2,
+		"update_date": "2017-03-04",
+		"author": "si科学战士gdan",
+		"category": "44冒险 玄幻",
+		"brief": "44当宁远发现自己被困死牢灯塔，钉墙不断逼近，而一墙之隔还关着女医学生苏瑾……奋力逃生并如约救出苏瑾后，坠海、失忆、面对敌人..."
+	}, {
+		"id": "005",
+		"title": "大唐除妖司",
+		"motion": "false",
+		"thumb": "%SWFPATH%/img/static_comic/dtcys/recommend.jpg",
+		"poster": "%SWFPATH%/img/static_comic/dtcys/poster.jpg",
+		"data": "../data/dtcys.json",
+		"episodes": 1,
+		"update_date": "2017-03-05",
+		"author": "55s大唐除妖司gdan",
+		"category": "55冒险 玄幻",
+		"brief": "55当宁远发现自己被困死牢灯塔，钉墙不断逼近，而一墙之隔还关着女医学生苏瑾……奋力逃生并如约救出苏瑾后，坠海、失忆、面对敌人..."
 	}]
 }

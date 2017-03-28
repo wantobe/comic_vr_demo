@@ -1,27 +1,51 @@
 [
 	{
+		"id": "011",
 		"title": "超西游",
 		"motion": "false",
 		"thumb": "%SWFPATH%/img/static_comic/chaoxiyou/001.jpg",
+		"poster": "%SWFPATH%/img/static_comic/chaoxiyou/poster.jpg",
 		"data": "../data/chaoxiyou.json",
-		"episodes": 1
+		"episodes": 1,
+		"update_date": "2017-03-01",
+		"author": "siw超西游",
+		"category": "冒险 玄幻",
+		"brief": "超西游超西游关着女医学生苏瑾……奋力逃生并如约救出苏瑾后，坠海、失忆、面对敌人..."
 	}, {
-		"title": "育儿绘本",
-		"motion": "true",
-		"thumb": "%SWFPATH%/img/parenting_books/child.jpg",
-		"data": "../data/child.json",
-		"episodes": 1
+		"id": "005",
+		"title": "大唐除妖司",
+		"motion": "false",
+		"thumb": "%SWFPATH%/img/static_comic/dtcys/recommend.jpg",
+		"poster": "%SWFPATH%/img/static_comic/dtcys/001.jpg",
+		"data": "../data/dtcys.json",
+		"episodes": 1,
+		"update_date": "2017-03-05",
+		"author": "55s大唐除妖司gdan",
+		"category": "55冒险 玄幻",
+		"brief": "55当宁远发现自己被困死牢灯塔，钉墙不断逼近，而一墙之隔还关着女医学生苏瑾……奋力逃生并如约救出苏瑾后，坠海、失忆、面对敌人..."
 	}, {
+		"id": "004",
 		"title": "科学战士(2话)",
 		"motion": "false",
-		"thumb": "%SWFPATH%/img/static_comic/kexuezhanshi/001.jpg",
+		"thumb": "%SWFPATH%/img/static_comic/kexuezhanshi/2/001.jpg",
+		"poster": "%SWFPATH%/img/static_comic/kexuezhanshi/poster.jpg",
 		"data": "../data/kexuezhanshi.json",
-		"episodes": 2
+		"episodes": 2,
+		"update_date": "2017-03-01",
+		"author": "s科学战士",
+		"category": "冒险 玄幻",
+		"brief": "科学战士 关着女医学生苏瑾……奋力逃生并如约救出苏瑾后，坠海、失忆、面对敌人..."
 	}, {
+		"id": "001",
 		"title": "死亡名单",
 		"motion": "true",
 		"thumb": "%SWFPATH%/img/bodycount/new.jpg",
+		"poster": "%SWFPATH%/img/bodycount/poster.jpg",
 		"data": "../data/bodycount_data.json",
-		"episodes": 1
+		"episodes": 1,
+		"update_date": "2017-03-01",
+		"author": "s死亡名单",
+		"category": "冒险 玄幻",
+		"brief": "死亡名单游关着女医学生苏瑾……奋力逃生并如约救出苏瑾后，坠海、失忆、面对敌人..."
 	}
 ]

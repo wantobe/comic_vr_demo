@@ -1,6 +1,6 @@
 <krpano>
 	
-	<skin_settings curIndex="0" count="0" loop="false" isAutoStart="0" distance="40" hotspot_num="5" speed="4" direction="left"  model="single" />
+	<skin_settings curIndex="0" count="0" loop="false" isAutoStart="0" distance="40" hotspot_num="5" speed="8" direction="left"  model="single" />
 	
 	
 	<!--生成Gallery画廊
@@ -191,7 +191,7 @@
 				data = data2;
 				krpano.set("skin_settings.model","double");
 			}
-			var count = window.gallary_data.length;
+			var count = window.gallery_data.length;
 			var curIndex = args[1];
 			var isAutoStart = args[2]==null?0:args[2];
 			
@@ -207,10 +207,8 @@
 				pos = pos+count;
 			}
 			
-			for(var i=0;i<data.length;i++ ){
-				krpano.call("galleryCreateHotspot('"+JSON.stringify(data[i])+"')");
-			}
 			
+			KRPANO.call("create_hotspot", data);
 
 			for(var i=0;i<selectModel.hotspot_num;i++ ){
 				var imgPos = i+1;
@@ -219,10 +217,10 @@
 				}
 				
 				if(args[3]=='single'){
-					krpano.set("hotspot[gallery_"+imgPos+"].url",window.gallary_data[pos].img);
+					krpano.set("hotspot[gallery_"+imgPos+"].url",window.gallery_data[pos].img);
 				}else if(args[3]=='double'){
-					krpano.set("hotspot[gallery_"+imgPos+"_2].url",window.gallary_data[pos].img2);
-					krpano.set("hotspot[gallery_"+imgPos+"_1].url",window.gallary_data[pos].img);
+					krpano.set("hotspot[gallery_"+imgPos+"_2].url",window.gallery_data[pos].img2);
+					krpano.set("hotspot[gallery_"+imgPos+"_1].url",window.gallery_data[pos].img);
 				}
 				
 				pos++;
@@ -230,7 +228,7 @@
 			
 			if(isAutoStart==1){
 				var speed =  krpano.get("skin_settings.speed");
-				krpano.call("setinterval(gallaryinterval,"+speed+",gallery_next())");
+				krpano.call("setinterval(galleryinterval,"+speed+",gallery_next())");
 			}
 		]]>
 	</action>
@@ -252,7 +250,15 @@
 			}
 			var curIndex_temp = next == 1 ? ++curIndex : curIndex--; 
 			
-			if(resolve("skin_settings.loop")=="true" ||resolve("skin_settings.loop")=="false" && curIndex>=0 && curIndex<window.gallary_data.length){
+			if(resolve("skin_settings.loop")=="true" || 
+				resolve("skin_settings.loop")=="false" && curIndex>=0 && curIndex<window.gallery_data.length){
+				
+				if(resolve("skin_settings.loop")=="false"){
+					if(curIndex == gallery_data.length-1){
+						krpano.call('gallery_stop()');
+						krpano.set('hotspot[atuoBtn].url','%SWFPATH%/img/aut.png');
+					}
+				}
 			
 			for(var i=0;i<hotspot_num;i++ ){
 			
@@ -267,54 +273,61 @@
 				var dis = ath-distance*direction*next;
 				var isCount = false;
 				if(ath==-2*distance*direction*next){
-					if(curIndex_temp%window.gallary_data.length==0){
-						curIndex=(window.gallary_data.length-1)*(1-next)/2;
+					if(curIndex_temp%window.gallery_data.length==0){
+						curIndex=(window.gallery_data.length-1)*(1-next)/2;
 					}
 					krpano.set("skin_settings.curIndex",curIndex);
-					krpano.call("tween(hotspot[gallery_"+hotspotPos+"].alpha,0,0.5,,tween(hotspot[gallery_"+hotspotPos+"].alpha,1,0.5);)");
-					krpano.call("tween(hotspot[gallery_"+hotspotPos+"].ath,"+(-180*direction*next)+",0.5,,set(hotspot[gallery_"+hotspotPos+"].ath,"+180*direction*next+");tween(hotspot[gallery_"+hotspotPos+"].ath,"+2*distance*direction*next+",0.5))");
-					//krpano.call("tween(hotspot[gallery_"+hotspotPos+"].ath,"+2*distance*direction*next+",1)");
+					actions.tween("hotspot[gallery_"+hotspotPos+"].alpha", 0, 0.5, null,
+						"tween(hotspot[gallery_"+hotspotPos+"].alpha,1,0.5);"
+					);
+					actions.tween("hotspot[gallery_"+hotspotPos+"].ath", -180*direction*next, 0.5, null,
+						"set(hotspot[gallery_"+hotspotPos+"].ath,"+180*direction*next+");"
+						+"tween(hotspot[gallery_"+hotspotPos+"].ath,"+2*distance*direction*next+",0.5)"
+					);
 					
 					if(model=='double'){
-						krpano.call("tween(hotspot[gallery_"+hotsotPos2+"].alpha,0,0.5,,tween(hotspot[gallery_"+hotsotPos2+"].alpha,1,0.5);)");
-						krpano.call("tween(hotspot[gallery_"+hotsotPos2+"].ath,"+(-180*direction*next)+",0.5,,set(hotspot[gallery_"+hotsotPos2+"].ath,"+180*direction*next+");tween(hotspot[gallery_"+hotsotPos2+"].ath,"+2*distance*direction*next+",0.5))");
+						actions.tween("hotspot[gallery_"+hotsotPos2+"].alpha", 0, 0.5, null,
+							"tween(hotspot[gallery_"+hotsotPos2+"].alpha,1,0.5);"
+						);
+						actions.tween("hotspot[gallery_"+hotsotPos2+"].ath", -180*direction*next, 0.5, null,
+								"set(hotspot[gallery_"+hotsotPos2+"].ath,"+180*direction*next+");"
+								+"tween(hotspot[gallery_"+hotsotPos2+"].ath,"+2*distance*direction*next+",0.5)"
+						);
 					}
 					var leftPos = curIndex+2*next;
-					if(leftPos>=window.gallary_data.length || leftPos<0){
-						leftPos = leftPos-window.gallary_data.length*next;
+					if(leftPos>=window.gallery_data.length || leftPos<0){
+						leftPos = leftPos-window.gallery_data.length*next;
 					}
 					
-					
-					krpano.set("hotspot[gallery_"+hotspotPos+"].url",window.gallary_data[leftPos].img);
+					krpano.set("hotspot[gallery_"+hotspotPos+"].url",window.gallery_data[leftPos].img);
 					if(model=='double'){
-						krpano.set("hotspot[gallery_"+hotsotPos2+"].url",window.gallary_data[leftPos].img2);
+						krpano.set("hotspot[gallery_"+hotsotPos2+"].url",window.gallery_data[leftPos].img2);
 					}
 				}else{
 					var callBack = null;
 					var callBack2 = null;
 					if(ath==0){
-						krpano.call("tween(hotspot[gallery_"+hotspotPos+"].depth,3000,0.3)");
+						actions.tween("hotspot[gallery_"+hotspotPos+"].depth",3000,0.3);
 						if(model=='double'){
-							krpano.call("tween(hotspot[gallery_"+hotsotPos2+"].depth,3000,0.3)");
+							actions.tween("hotspot[gallery_"+hotsotPos2+"].depth",3000,0.3);
 						}	
 					}else if(ath==distance*direction*next){
-						//var speed = parseInt(krpano.get("skin_settings.speed"))-1;
-						callBack = "tween(hotspot[gallery_"+hotspotPos+"].depth,"+2000+","+1+",easeOutBounce);";
+						callBack = "tween(hotspot[gallery_"+hotspotPos+"].depth, 2000, 1, easeOutQuint);";
 						if(model=='double'){
-							callBack2 = "tween(hotspot[gallery_"+hotsotPos2+"].depth,"+2000+","+1+",easeOutBounce);";
+							callBack2 = "tween(hotspot[gallery_"+hotsotPos2+"].depth, 2000, 1, easeOutQuint);";
 						}
 					}
 					
-					krpano.call("tween(hotspot[gallery_"+hotspotPos+"].ath,"+dis+",1,,"+callBack+")");
+					actions.tween("hotspot[gallery_"+hotspotPos+"].ath",dis,1,"linear",callBack);
 					
 					if(model=='double'){
-							krpano.call("tween(hotspot[gallery_"+hotsotPos2+"].ath,"+dis+",1,,"+callBack2+")");
+						actions.tween("hotspot[gallery_"+hotsotPos2+"].ath", dis,1,"linear",callBack2)
 					}
 				}
 			}
 			
 			}
-			krpano.call("page_handler(calc(skin_settings.curIndex+1),get(skin_settings.count))");
+			KRPANO.call("page_handler", "calc(skin_settings.curIndex+1)", "get(skin_settings.count)");
 		]]>
 	</action>
 	
@@ -323,72 +336,12 @@
 	</action>
 	
 	<action name="gallery_play">
-			setinterval(gallaryinterval,get(skin_settings.speed),gallery_next());
+			setinterval(galleryinterval,get(skin_settings.speed),gallery_next());
 			set(skin_settings.isAutoStart,1);
 	</action>
 	<action name="gallery_stop">
-			clearinterval(gallaryinterval);
+			clearinterval(galleryinterval);
 			set(skin_settings.isAutoStart,0);
 	</action>
-	<!--动态生成hotspot-->
-	<action name="galleryCreateHotspot" type="Javascript" devices="html5">
-		<![CDATA[
-		var obj =  eval("("+args[1]+")");
-		var name = obj.name;
-		krpano.call("addhotspot("+name+")");
-		krpano.set("hotspot["+name+"].distorted",true);
-		krpano.set("hotspot["+name+"].visible",true);
-		krpano.set("hotspot["+name+"].edge","center");
-		krpano.set("hotspot["+name+"].url",obj.url);
-		if(obj.alpha!=null){
-			krpano.call("set(hotspot["+name+"].alpha,"+obj.alpha+")");
-		}
-		
-		if(obj.scale!=null){
-			krpano.call("set(hotspot["+name+"].scale,"+obj.scale+")");
-		}
-		
-		if(obj.zorder!=null){
-			krpano.call("set(hotspot["+name+"].zorder,"+obj.zorder+")");
-		}
-		
-		if(obj.ox!=null){
-			krpano.call("set(hotspot["+name+"].ox,"+obj.ox+")");
-		}
-		if(obj.oy!=null){
-			krpano.call("set(hotspot["+name+"].oy,"+obj.oy+")");
-		}
-		if(obj.depth!=null){
-			krpano.call("set(hotspot["+name+"].depth,"+obj.depth+")");
-		}
-		
-		if(obj.width!=null){
-			krpano.call("set(hotspot["+name+"].width,"+obj.width+")");
-		}
-		
-		if(obj.height!=null){
-			krpano.call("set(hotspot["+name+"].height,"+obj.height+")");
-		}
-		
-		if(obj.crop!=null){
-			krpano.call("set(hotspot["+name+"].crop,"+obj.crop+")");
-		}
-		
-		if(obj.ath!=null){
-			krpano.call("set(hotspot["+name+"].ath,"+obj.ath+")");
-		}
-		
-		if(obj.atv!=null){
-			krpano.call("set(hotspot["+name+"].atv,"+obj.atv+")");
-		}
-		
-		if(obj.rx!=null){
-			krpano.call("set(hotspot["+name+"].rx,"+obj.rx+")");
-		}
-		
-		if(obj.onclick!=null){
-			krpano.call("set(hotspot["+name+"].onclick,"+obj.onclick+")");
-		}
-		]]>
-	</action>
+	
 </krpano>

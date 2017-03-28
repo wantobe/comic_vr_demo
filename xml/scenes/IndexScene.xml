@@ -2,8 +2,8 @@
 	<include url="%SWFPATH%/xml/common.xml" />
 	<include url="%SWFPATH%/xml/controllers/IndexController.xml" />
 
+<!--index_list_init();-->
 	<scene name="index" onstart="index_list_init();">
-		<view fovtype="VFOV" limitview="lookat" fov="90" fovmin="20" fovmax="160" />
 		<image fov="10.0" if="hasBg==true">
 			<cube url="%SWFPATH%/img/bg/%$bgId%/mobile_%s.jpg" />
 		</image>
@@ -20,15 +20,7 @@
 
 	</scene>
 	
-	<scene name="theme_panel" onstart="theme_panel_init()">
-		<view fovtype="VFOV" limitview="lookat" fov="90" fovmin="20" fovmax="160" />
-		<image fov="10.0" if="hasBg==true">
-			<cube url="%SWFPATH%/img/bg/%$bgId%/mobile_%s.jpg" />
-		</image>
-	</scene>
-	
-	<scene name="poster_panel" onstart="poster_panel_init();">
-		<view fovtype="VFOV" limitview="lookat" fov="90" fovmin="20" fovmax="160" />
+	<scene name="theme_panel" onstart="theme_panel_init();">
 		<image fov="10.0" if="hasBg==true">
 			<cube url="%SWFPATH%/img/bg/%$bgId%/mobile_%s.jpg" />
 		</image>
